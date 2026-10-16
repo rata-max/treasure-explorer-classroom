@@ -1,0 +1,10 @@
+_site/
+.private-source/
+private-source/
+dist/
+.test-tmp/
+__pycache__/
+*.pyc
+*.key
+*.pem
+source_readonly*
