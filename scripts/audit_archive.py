@@ -12,7 +12,8 @@ ROOT_FILES = {
     "baselines.py", "evaluate.py", "intro_ko.pptx",
 }
 REQUIRED = {"README.md", "student_policy.py", "agent.py", "grade.py", "score_grading.py",
-            "grading.json", "treasure_explorer/__init__.py"}
+            "grading.json", "treasure_explorer/__init__.py", "treasure_explorer/__main__.py",
+            "treasure_explorer/runner.py", "treasure_explorer/viewer.py", "treasure_explorer/viewer_page.py"}
 
 
 def audit(filename):

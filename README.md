@@ -17,6 +17,7 @@
 ## 배포 경계
 
 - GitHub Actions가 원본 한 개에만 접근 가능한 읽기 전용 키로 Private 과제 저장소를 읽습니다. 원본에는 쓰지 않습니다.
+- 매 배포에서 원본의 공통 viewer·학생 안내를 동기화하고 다섯 회차 ZIP을 다시 생성한 뒤 공개 설정에 맞춰 배포합니다.
 - 공개 플래그가 정확한 boolean인지 검사하고, `true` 회차의 ZIP만 검사·복사합니다. 누락된 ZIP이나 잘못된 설정은 배포 실패로 처리합니다.
 - ZIP 안의 CRC·필수 파일·경로·허용 파일 목록을 검사합니다. 미공개 회차 ZIP, 풀린 Python/맵 폴더, `.git`, 키, 교수자 검증 자료는 배포물에 포함하지 않습니다.
 - 홈페이지 파일과 공개 ZIP만 `_site/`에 만들어 GitHub Pages에 배포합니다. ZIP은 Public 저장소의 Git 이력에 넣지 않습니다.
@@ -37,8 +38,11 @@
 
 Node.js 22+와 Python 3.11+ 표준 라이브러리만 사용합니다.
 
+학생은 기존 명령의 `--view`로 로컬 브라우저 viewer를 엽니다. 고정된 맵에서 시작 상태·재생/일시정지·이전/다음·턴 슬라이더·배속을 사용할 수 있습니다. `--view --terminal`은 터미널 표시이며 `--no-clear`는 프레임 로그입니다.
+
 ```powershell
 node --test
+python C:\path\to\treasure-explorer-challenge\tools\sync_releases.py --build-zips
 node scripts/build_site.mjs --source C:\path\to\treasure-explorer-challenge
 ```
 

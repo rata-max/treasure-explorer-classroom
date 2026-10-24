@@ -16,7 +16,7 @@ const zipCode = `import pathlib, sys, zipfile
 root = pathlib.Path(sys.argv[1])
 for session in sys.argv[2:]:
     with zipfile.ZipFile(root / (session + '.zip'), 'w') as archive:
-        for name in ('README.md', 'student_policy.py', 'agent.py', 'grade.py', 'score_grading.py', 'grading.json', 'treasure_explorer/__init__.py', 'maps/fixture.json'):
+        for name in ('README.md', 'student_policy.py', 'agent.py', 'grade.py', 'score_grading.py', 'grading.json', 'treasure_explorer/__init__.py', 'treasure_explorer/__main__.py', 'treasure_explorer/runner.py', 'treasure_explorer/viewer.py', 'treasure_explorer/viewer_page.py', 'maps/fixture.json'):
             archive.writestr(name, 'fixture only')
 `;
 const created = spawnSync(python, ['-c', zipCode, path.join(source, 'dist'), ...IDS], { encoding: 'utf8' });
@@ -56,6 +56,7 @@ test('artifact contains only allowlisted website files and the first ZIP, never 
   assert.deepEqual(fs.readdirSync(output).sort(), [...STATIC, 'content.js', '.nojekyll', 'dist', 'release-manifest.json'].sort());
   const data = publicData(output);
   for (const key of ['SITE_CONTENT', 'SITE_CONTENT_KO']) {
+    assert.equal(data[key].stages[0].repositoryUrl, `dist/${IDS[0]}.zip?v=${manifest.published[0].sha256.slice(0, 16)}`);
     for (let i = 1; i < IDS.length; i++) {
       assert.equal(data[key].stages[i].repositoryUrl, null);
       assert.deepEqual(data[key].stages[i].objectives, []);
@@ -122,4 +123,13 @@ test('workflow never runs PR code with the private source key or uploads a check
   assert.match(workflow, /path: _site/);
   assert.match(workflow, /ssh-key: \$\{\{ secrets\.SOURCE_READONLY_KEY \}\}/);
   assert.match(workflow, /persist-credentials: false/);
+  assert.match(workflow, /python \.private-source\/tools\/sync_releases\.py --build-zips/);
+});
+
+test('archive auditor requires the interactive viewer in student downloads', () => {
+  const filename = path.join(scratch, 'missing-viewer.zip');
+  const made = spawnSync(python, ['-c', "import sys,zipfile; source=zipfile.ZipFile(sys.argv[1]); out=zipfile.ZipFile(sys.argv[2],'w'); [out.writestr(e,source.read(e.filename)) for e in source.infolist() if e.filename != 'treasure_explorer/viewer_page.py']; out.close(); source.close()", path.join(source, 'dist', `${IDS[0]}.zip`), filename], { encoding: 'utf8' });
+  assert.equal(made.status, 0, made.stderr);
+  const checked = spawnSync(python, [path.join(ROOT, 'scripts/audit_archive.py'), filename], { encoding: 'utf8' });
+  assert.notEqual(checked.status, 0);
 });

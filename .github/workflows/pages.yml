@@ -39,6 +39,8 @@ jobs:
           ssh-key: ${{ secrets.SOURCE_READONLY_KEY }}
           persist-credentials: false
           fetch-depth: 1
+      - name: Rebuild student ZIPs from the current private source
+        run: python .private-source/tools/sync_releases.py --build-zips
       - name: Test fail-closed release filtering
         run: node --test
       - name: Build only public assets and explicitly released ZIPs

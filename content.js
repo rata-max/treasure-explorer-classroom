@@ -19,7 +19,7 @@ window.SITE_CONTENT = {
   "initialEnergy": "MAP",
   "submission": "student_policy.py",
   "pythonVersion": "Python 3.11+",
-  "command": "python -m treasure_explorer --map maps/shared_branch.json --agent agent.py --view",
+  "command": "python -m treasure_explorer --map maps/warmup.json --agent agent.py --view",
   "scoreFormula": "50 EXIT BONUS + TREASURE + ENERGY LEFT - 5 INVALID",
   "noExitRule": "NO EXIT, NO SCORE",
   "missionLabel": "01 / MISSION",

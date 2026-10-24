@@ -51,7 +51,11 @@ export function buildSite({ source, output = path.join(ROOT, '_site'), root = RO
   for (const language of ['SITE_CONTENT', 'SITE_CONTENT_KO']) {
     const content = data[language];
     content.stages.forEach((stage, i) => {
-      if (stage.unlocked) return;
+      if (stage.unlocked) {
+        const item = packages.find(item => item.id === IDS[i]);
+        stage.repositoryUrl = `dist/${item.id}.zip?v=${item.sha256.slice(0, 16)}`;
+        return;
+      }
       const ko = language.endsWith('_KO');
       stage.objectives = [];
       stage.deliverables = [];
