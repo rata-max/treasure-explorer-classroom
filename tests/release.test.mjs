@@ -49,6 +49,18 @@ test('initial browser configuration opens only Week 1 Tuesday in BOTH languages'
   }
 });
 
+test('Week 2 assessment is hidden while public commands explicitly select practice', () => {
+  const raw = loadContent(path.join(ROOT, 'content.js'));
+  for (const key of ['SITE_CONTENT', 'SITE_CONTENT_KO']) {
+    for (const i of [2,3]) {
+      assert.equal(raw[key].stageCommands[i], 'python grade.py --practice');
+      assert.match(raw[key].stages[i].evaluation.label, /HIDDEN|비공개/);
+      assert.match(raw[key].stages[i].evaluation.text, /60/);
+      assert.match(raw[key].stages[i].evaluation.text, /40/);
+    }
+  }
+});
+
 test('artifact contains only allowlisted website files and the first ZIP, never source or history', () => {
   const { output, manifest } = build(site());
   assert.deepEqual(manifest.published.map(s => s.session), [IDS[0]]);

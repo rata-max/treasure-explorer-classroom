@@ -1,5 +1,4 @@
-// 공개 스위치는 이 다섯 값만 수정합니다. true 저장 후 Actions 배포 완료를 확인하세요.
-// 잠긴 회차 ZIP은 저장소나 Pages 배포물에 포함되지 않습니다.
+// Release switches are unchanged. Locked ZIPs stay excluded from Pages.
 window.RELEASES = {
   "week1_tuesday": true,
   "week1_thursday": false,
@@ -8,13 +7,12 @@ window.RELEASES = {
   "week3_tuesday": false
 };
 
-// Homepage text. Never put credentials, solutions or unreleased source code here.
 window.SITE_CONTENT = {
   "semester": "Problem Solving Techniques · Fall 2026",
   "badge": "3-HOUR LABS",
   "title": "Explore.",
   "subtitle": "Collect. Return.",
-  "description": "Weeks 1–2 use public-map scores; Week 3 uses hidden-map scores. Teams of two, no AI, 180 minutes per session.",
+  "description": "Week 1 uses public-map scores. Weeks 2 and 3 use hidden-map scores. Teams of two, no AI, 180 minutes per session.",
   "labHours": "3H",
   "initialEnergy": "MAP",
   "submission": "student_policy.py",
@@ -93,7 +91,7 @@ window.SITE_CONTENT = {
     [
       "02:40",
       "Check",
-      "Run grade.py and check submission; notes are optional feedback."
+      "Check grade.py in Week 1, or grade.py --practice in Weeks 2/3, then submit your policy."
     ]
   ],
   "rubric": [
@@ -109,13 +107,13 @@ window.SITE_CONTENT = {
     ],
     [
       "W2 TUE",
-      "Public score only · Basic 60 + challenge 40",
-      "Ten weighted maps; four planning challenges."
+      "Hidden score only · Basic 60 + challenge 40",
+      "Ten public weighted maps are practice. The instructor holds the final maps privately."
     ],
     [
       "W2 THU",
-      "Public score only · Basic 60 + challenge 40",
-      "Fourteen public maps; three diagnostic pairs."
+      "Hidden score only · Basic 60 + challenge 40",
+      "Fourteen public maps are practice. Average hidden LOW/HIGH pairs before conversion."
     ],
     [
       "W3 TUE",
@@ -132,7 +130,7 @@ window.SITE_CONTENT = {
   "integrityRules": [
     "Work in a team of two. Do not share code with other teams.",
     "Use the current introduction and distributed API/specification. No Week 6/7 materials, AI or web searches.",
-    "You may reuse or rewrite your team's earlier code from THIS project.",
+    "Do not reuse or rewrite your team's earlier code from THIS project. Earlier concepts may inform a new implementation.",
     "Do not publish answers before grading ends, or identify maps/seeds through hardcoding or side channels."
   ],
   "stages": [
@@ -164,10 +162,10 @@ window.SITE_CONTENT = {
       "week": "WEEK 1",
       "day": "THURSDAY",
       "title": "GLOBAL TREE OPTIMIZATION ★★★",
-      "unlocked": true,
+      "unlocked": false,
       "tagline": "Eight tree maps up to 12 treasures: choose the subset and the order.",
       "focus": "Subset planning · Pruned search · Public score",
-      "repositoryUrl": "dist/week1_thursday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "Choose a treasure subset and visit order; DP/pruned search can improve scores.",
         "A worked state example is provided; heuristics earn their achieved scores.",
@@ -187,22 +185,22 @@ window.SITE_CONTENT = {
       "week": "WEEK 2",
       "day": "TUESDAY",
       "title": "WEIGHTED GRAPH ROUTES ★★★",
-      "unlocked": true,
-      "tagline": "Combine weighted routes with the previous visit planner.",
+      "unlocked": false,
+      "tagline": "Practise weighted routes and visit planning, then apply the policy to unseen assessment maps.",
       "focus": "Dijkstra · Priority queue · Exit avoidance",
-      "repositoryUrl": "dist/week2_tuesday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "Plan with entry energy costs instead of hop counts.",
-        "Reuse Week 1's visit planner on the four challenge maps.",
-        "Three new maps cover shared bundles, weighted order traps and budget cuts."
+        "Combine subset and visit-order planning with weighted costs.",
+        "Final maps are unseen. Terrain, exit and treasure values remain visible during each run."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
-        "label": "PUBLIC SCORE",
-        "title": "Ten weighted maps; four planning challenges.",
-        "text": "Published B/T anchors, basic 60/challenge 40. No separate implementation, note or experiment marks."
+        "label": "HIDDEN SCORE",
+        "title": "Ten public maps are practice. Only hidden maps count toward the final grade.",
+        "text": "Private final B/T anchors, basic 60/challenge 40, out of 100. Public grade.py --practice does not count."
       }
     },
     {
@@ -210,22 +208,22 @@ window.SITE_CONTENT = {
       "week": "WEEK 2",
       "day": "THURSDAY",
       "title": "PLANNING WITH HIDDEN VALUES ★★★★",
-      "unlocked": true,
-      "tagline": "Public assessment maps, hidden in-run values: observe and revise.",
+      "unlocked": false,
+      "tagline": "Unseen assessment maps with fully visible terrain and values revealed on arrival.",
       "focus": "Value estimation · Group planning · Replanning",
-      "repositoryUrl": "dist/week2_thursday.zip",
+      "repositoryUrl": null,
       "objectives": [
-        "Estimate unrevealed values and update plans after observation.",
-        "The first value can be ambiguous; paid observations have costs and benefits.",
-        "Average LOW/HIGH diagnostic pairs before applying public score conversion."
+        "Estimate unrevealed values and update plans after observations.",
+        "One LOW/HIGH type applies to the whole map. Include the cost of acquiring information.",
+        "Average each final LOW/HIGH challenge pair before applying its private B/T anchors."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
-        "label": "PUBLIC SCORE",
-        "title": "Fourteen public maps; three diagnostic pairs.",
-        "text": "Published B/T anchors, basic 60/challenge 40. No separate implementation, note or experiment marks."
+        "label": "HIDDEN SCORE",
+        "title": "Fourteen public maps are practice. Only hidden maps count toward the final grade.",
+        "text": "Basic 60/challenge 40, out of 100. Terrain, exit and treasure positions remain visible. Values appear on arrival."
       }
     },
     {
@@ -233,10 +231,10 @@ window.SITE_CONTENT = {
       "week": "WEEK 3",
       "day": "TUESDAY",
       "title": "HIDDEN FINAL CHALLENGE ★★★★★",
-      "unlocked": true,
+      "unlocked": false,
       "tagline": "The same hidden-value model, now with fog and an unseen exit.",
       "focus": "Online decisions · Expected gain · Experiment design",
-      "repositoryUrl": "dist/week3_tuesday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "Extend the observed-value policy to fog and an unknown exit.",
         "Choose exploration, treasure visits and escape reserves.",
@@ -270,17 +268,17 @@ window.SITE_CONTENT = {
     ],
     [
       "Plan with entry energy costs instead of hop counts.",
-      "Reuse Week 1's visit planner on the four challenge maps.",
-      "Three new maps cover shared bundles, weighted order traps and budget cuts.",
-      "Use one generic student_policy.py for all maps; no hardcoded map identification.",
-      "Official grade: grade.py. No hidden maps."
+      "Combine subset and visit-order planning with weighted costs.",
+      "Final maps are unseen. Terrain, exit and treasure values remain visible during each run.",
+      "Use one generic student_policy.py for all maps. Do not hardcode map identification.",
+      "Public practice: grade.py --practice. The instructor runs the private final suite."
     ],
     [
-      "Estimate unrevealed values and update plans after observation.",
-      "The first value can be ambiguous; paid observations have costs and benefits.",
-      "Average LOW/HIGH diagnostic pairs before applying public score conversion.",
-      "Use one generic student_policy.py for all maps; no hardcoded map identification.",
-      "Official grade: grade.py. No hidden maps."
+      "Estimate unrevealed values and update plans after observations.",
+      "One LOW/HIGH type applies to the whole map. Include the cost of acquiring information.",
+      "Average each final LOW/HIGH challenge pair before applying its private B/T anchors.",
+      "Use one generic student_policy.py for all maps. Do not hardcode map identification.",
+      "Public practice: grade.py --practice. The instructor runs the private final suite."
     ],
     [
       "Extend the observed-value policy to fog and an unknown exit.",
@@ -293,8 +291,8 @@ window.SITE_CONTENT = {
   "stageCommands": [
     "python grade.py",
     "python grade.py",
-    "python grade.py",
-    "python grade.py",
+    "python grade.py --practice",
+    "python grade.py --practice",
     "python grade.py --practice"
   ],
   "batchCommands": {
@@ -304,25 +302,12 @@ window.SITE_CONTENT = {
   }
 };
 
-// One release switch controls both languages; legacy per-stage flags are ignored.
-// The build also enforces this same allowlist before copying any ZIP.
-function applyReleaseSwitches() {
-  const ids = ["week1_tuesday", "week1_thursday", "week2_tuesday", "week2_thursday", "week3_tuesday"];
-  for (const content of [window.SITE_CONTENT, window.SITE_CONTENT_KO]) {
-    if (!content) continue;
-    content.stages.forEach((stage, i) => {
-      stage.unlocked = window.RELEASES[ids[i]] === true;
-      stage.repositoryUrl = stage.unlocked ? `dist/${ids[i]}.zip` : null;
-    });
-  }
-}
-
 window.SITE_CONTENT_KO = {
   "semester": "문제해결기법 · 2026년 가을학기",
   "badge": "3시간 실습",
   "title": "탐험하라.",
   "subtitle": "수집하라. 귀환하라.",
-  "description": "1·2주차는 공개 맵 score, 3주차는 hidden map score로 평가합니다. 2인 팀, AI 금지, 회차당 180분입니다.",
+  "description": "1주차는 공개 맵, 2·3주차는 비공개 맵 score로 평가합니다. 2인 팀, AI 금지, 회차당 180분입니다.",
   "labHours": "3H",
   "initialEnergy": "MAP",
   "submission": "student_policy.py",
@@ -401,7 +386,7 @@ window.SITE_CONTENT_KO = {
     [
       "02:40",
       "제출 점검",
-      "grade.py와 제출 파일 확인. 기록은 선택 피드백용."
+      "1주차는 grade.py, 2·3주차는 grade.py --practice로 확인 후 정책을 제출합니다."
     ]
   ],
   "rubric": [
@@ -417,13 +402,13 @@ window.SITE_CONTENT_KO = {
     ],
     [
       "W2 TUE",
-      "공개 score만 · 기본 60 + 도전 40",
-      "가중 맵 10개. 방문 계획 도전 4개."
+      "비공개 score 평가 · 기본 60 + 도전 40",
+      "공개 가중 맵 10개는 연습용. 최종 맵은 교수자가 비공개 보관."
     ],
     [
       "W2 THU",
-      "공개 score만 · 기본 60 + 도전 40",
-      "공개 맵 14개. LOW/HIGH 진단 쌍 3개."
+      "비공개 score 평가 · 기본 60 + 도전 40",
+      "공개 맵 14개는 연습용. 최종 LOW/HIGH 쌍은 평균 후 환산."
     ],
     [
       "W3 TUE",
@@ -440,7 +425,7 @@ window.SITE_CONTENT_KO = {
   "integrityRules": [
     "2인 팀으로 진행하며 다른 팀과 코드를 공유하지 않습니다.",
     "당회차 소개 자료와 배포 명세·API만 참고합니다. 기존 Week 6·7 자료·AI·웹 검색은 금지합니다.",
-    "이번 프로젝트의 이전 회차에서 팀이 직접 작성한 코드는 재사용·재작성할 수 있습니다.",
+    "이번 프로젝트의 이전 회차 코드 재사용·재작성은 금지합니다. 이전 개념은 새 구현의 아이디어로 활용할 수 있습니다.",
     "채점 전 답안 공개, 맵·좌표·시드 하드코딩과 사이드 채널 이용은 금지합니다."
   ],
   "stages": [
@@ -472,10 +457,10 @@ window.SITE_CONTENT_KO = {
       "week": "1주차",
       "day": "목요일",
       "title": "전역 트리 최적화 ★★★",
-      "unlocked": true,
+      "unlocked": false,
       "tagline": "보물 최대 12개의 트리 맵 8개: 부분집합과 순서를 고르세요.",
       "focus": "부분집합 계획 · 가지치기 · 공개 score",
-      "repositoryUrl": "dist/week1_thursday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "보물 부분집합과 방문 순서를 고릅니다. DP·가지치기로 score를 개선할 수 있습니다.",
         "상태 설계 예제를 제공하며 휴리스틱도 얻은 score로 평가합니다.",
@@ -495,22 +480,22 @@ window.SITE_CONTENT_KO = {
       "week": "2주차",
       "day": "화요일",
       "title": "가중 그래프 경로 ★★★",
-      "unlocked": true,
-      "tagline": "가중 경로와 이전 방문 계획을 결합하세요.",
+      "unlocked": false,
+      "tagline": "공개 맵에서 가중 경로와 방문 계획을 연습하고 비공개 맵에서 평가합니다.",
       "focus": "Dijkstra · 우선순위 큐 · 출구 경유 금지",
-      "repositoryUrl": "dist/week2_tuesday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "이동 횟수 대신 지형별 에너지 비용으로 판단합니다.",
-        "1주차의 방문 계획을 도전 맵 4개에 결합합니다.",
-        "공유 묶음·가중 순서 함정·예산 절단 맵 3개를 추가했습니다."
+        "부분집합·방문 순서 계획을 가중 비용과 결합합니다.",
+        "평가 맵은 비공개지만 실행 중 지형·출구·보물 값은 모두 공개됩니다."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
-        "label": "공개 score 평가",
-        "title": "가중 맵 10개. 방문 계획 도전 4개.",
-        "text": "공개 grading.json의 B·T로 기본 60/도전 40 환산. 구현·노트·실험 별도 배점 없음."
+        "label": "비공개 score 평가",
+        "title": "공개 10개는 연습용. 최종 성적은 비공개 맵만 반영.",
+        "text": "최종 비공개 B·T로 기본 60/도전 40, 100점 환산. 공개 grade.py --practice는 성적에 미반영."
       }
     },
     {
@@ -518,22 +503,22 @@ window.SITE_CONTENT_KO = {
       "week": "2주차",
       "day": "목요일",
       "title": "관측하며 갱신하는 보물 계획 ★★★★",
-      "unlocked": true,
-      "tagline": "평가 맵은 공개, 실행 중 가치는 미공개: 관측하고 갱신하세요.",
+      "unlocked": false,
+      "tagline": "평가 맵은 비공개이며, 실행 중 보물 값은 도착해야 공개됩니다.",
       "focus": "가치 추정 · 묶음 방문 계획 · 재계획",
-      "repositoryUrl": "dist/week2_thursday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "미공개 가치를 추정하고 관측 후 계획을 갱신합니다.",
-        "애매한 첫 관측과 유료 정보 수집의 비용·이득을 다룹니다.",
-        "LOW/HIGH 진단 쌍은 평균 score를 구한 뒤 공개 성적으로 환산합니다."
+        "맵 전체에 LOW/HIGH 유형 하나를 적용합니다. 정보 수집의 비용도 고려합니다.",
+        "최종 도전 LOW/HIGH 쌍은 평균 score를 구한 뒤 비공개 B·T로 환산합니다."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
-        "label": "공개 score 평가",
-        "title": "공개 맵 14개. LOW/HIGH 진단 쌍 3개.",
-        "text": "공개 grading.json의 B·T로 기본 60/도전 40 환산. 구현·노트·실험 별도 배점 없음."
+        "label": "비공개 score 평가",
+        "title": "공개 14개는 연습용. 최종 성적은 비공개 맵만 반영.",
+        "text": "기본 60/도전 40의 100점 환산 유지. 지형·출구·보물 위치 공개, 가치는 도착 시 공개."
       }
     },
     {
@@ -541,10 +526,10 @@ window.SITE_CONTENT_KO = {
       "week": "3주차",
       "day": "화요일",
       "title": "숨겨진 최종 도전 ★★★★★",
-      "unlocked": true,
+      "unlocked": false,
       "tagline": "목요일과 같은 숨은 가치 규칙에 안개와 모르는 출구가 더해집니다.",
       "focus": "온라인 판단 · 기대 이익 · 실험 설계",
-      "repositoryUrl": "dist/week3_tuesday.zip",
+      "repositoryUrl": null,
       "objectives": [
         "이전 가치 판단을 안개와 출구 미확인 상황으로 확장합니다.",
         "탐색·보물 방문·탈출 여유를 선택합니다.",
@@ -578,17 +563,17 @@ window.SITE_CONTENT_KO = {
     ],
     [
       "이동 횟수 대신 지형별 에너지 비용으로 판단합니다.",
-      "1주차의 방문 계획을 도전 맵 4개에 결합합니다.",
-      "공유 묶음·가중 순서 함정·예산 절단 맵 3개를 추가했습니다.",
+      "부분집합·방문 순서 계획을 가중 비용과 결합합니다.",
+      "평가 맵은 비공개지만 실행 중 지형·출구·보물 값은 모두 공개됩니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
-      "공식 성적은 grade.py. hidden map 없음."
+      "공개 연습: grade.py --practice. 최종 비공개 평가는 교수자가 실행합니다."
     ],
     [
       "미공개 가치를 추정하고 관측 후 계획을 갱신합니다.",
-      "애매한 첫 관측과 유료 정보 수집의 비용·이득을 다룹니다.",
-      "LOW/HIGH 진단 쌍은 평균 score를 구한 뒤 공개 성적으로 환산합니다.",
+      "맵 전체에 LOW/HIGH 유형 하나를 적용합니다. 정보 수집의 비용도 고려합니다.",
+      "최종 도전 LOW/HIGH 쌍은 평균 score를 구한 뒤 비공개 B·T로 환산합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
-      "공식 성적은 grade.py. hidden map 없음."
+      "공개 연습: grade.py --practice. 최종 비공개 평가는 교수자가 실행합니다."
     ],
     [
       "이전 가치 판단을 안개와 출구 미확인 상황으로 확장합니다.",
@@ -601,8 +586,8 @@ window.SITE_CONTENT_KO = {
   "stageCommands": [
     "python grade.py",
     "python grade.py",
-    "python grade.py",
-    "python grade.py",
+    "python grade.py --practice",
+    "python grade.py --practice",
     "python grade.py --practice"
   ],
   "batchCommands": {
@@ -612,4 +597,15 @@ window.SITE_CONTENT_KO = {
   }
 };
 
+function applyReleaseSwitches() {
+  const ids = ["week1_tuesday", "week1_thursday", "week2_tuesday", "week2_thursday", "week3_tuesday"];
+  for (const content of [window.SITE_CONTENT, window.SITE_CONTENT_KO]) {
+    content.stages.forEach((stage, i) => {
+      stage.unlocked = window.RELEASES[ids[i]] === true;
+      stage.repositoryUrl = stage.unlocked ? `dist/${ids[i]}.zip` : null;
+    });
+  }
+}
+
 applyReleaseSwitches();
+
