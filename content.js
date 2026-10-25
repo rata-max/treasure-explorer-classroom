@@ -100,7 +100,7 @@ window.SITE_CONTENT = {
     [
       "W1 TUE",
       "Public score only · Basic 60 + challenge 40",
-      "Four public maps; reference BFS allowed."
+      "Own BFS required for additional points. Reference BFS: exit bonus only (50 game points)."
     ],
     [
       "W1 THU",
@@ -120,13 +120,14 @@ window.SITE_CONTENT = {
     [
       "W3 TUE",
       "Hidden score only · LOW/HIGH 50:50",
-      "Hidden final only; LOW/HIGH equally weighted."
+      "25% of the overall course grade. Hidden tests only; LOW/HIGH means have equal weight."
     ]
   ],
   "submissionRules": [
     "Run with --agent agent.py; edit and submit only student_policy.py. Official fixed files are used for grading.",
     "Do not modify agent.py, policy_helpers.py, the engine, maps, tests, or configuration files.",
-    "The agent must not access files, networks, subprocesses, or external packages."
+    "The agent must not access files, networks, subprocesses, or external packages.",
+    "Week 1 Tuesday: implement and use your own bfs_path() and set USE_MY_BFS=True to earn additional points. Reference BFS only: 50 game points per map on exit, otherwise 0."
   ],
   "integrityRules": [
     "Work in a team of two. Do not share code with other teams.",
@@ -145,7 +146,7 @@ window.SITE_CONTENT = {
       "focus": "BFS · Path recovery · Profit = value − extra energy",
       "repositoryUrl": "dist/week1_tuesday.zip",
       "objectives": [
-        "Learn BFS path recovery; reference routing has no separate deduction.",
+        "Week 1 Tuesday: implement and use your own bfs_path() and set USE_MY_BFS=True to earn additional points. Reference BFS only: 50 game points per map on exit, otherwise 0.",
         "Choose collection and targets from value minus extra energy.",
         "Improve the two challenge maps by jointly planning treasures."
       ],
@@ -154,8 +155,8 @@ window.SITE_CONTENT = {
       ],
       "evaluation": {
         "label": "PUBLIC SCORE",
-        "title": "Four public maps; reference BFS allowed.",
-        "text": "Published B/T anchors, basic 60/challenge 40. No separate implementation, note or experiment marks."
+        "title": "Own BFS required for additional points. Reference BFS: exit bonus only (50 game points).",
+        "text": "Treasure-value and remaining-energy points count only with your own BFS in use. grade.py applies this rule before B/T conversion. 50 game points do not mean 50/100 assignment marks."
       }
     },
     {
@@ -247,17 +248,18 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "HIDDEN FINAL",
         "title": "Hidden final only; LOW/HIGH equally weighted.",
-        "text": "The final metric is in game-score units, not out of 100. Public practice and presentation are ungraded."
+        "text": "The final metric is in game-score units, not out of 100. Public practice does not count toward the hidden-test score. Week 3 accounts for 25% of the overall course grade; the Thursday presentation is a separate 15%."
       }
     }
   ],
   "stageRules": [
     [
-      "Learn BFS path recovery; reference routing has no separate deduction.",
+      "Week 1 Tuesday: implement and use your own bfs_path() and set USE_MY_BFS=True to earn additional points. Reference BFS only: 50 game points per map on exit, otherwise 0.",
       "Choose collection and targets from value minus extra energy.",
       "Improve the two challenge maps by jointly planning treasures.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
-      "Official grade: grade.py. No hidden maps."
+      "Official grade: grade.py. No hidden maps.",
+      "Treasure-value and remaining-energy points count only with your own BFS in use. grade.py applies this rule before B/T conversion. 50 game points do not mean 50/100 assignment marks."
     ],
     [
       "Choose a treasure subset and visit order; DP/pruned search can improve scores.",
@@ -406,7 +408,7 @@ window.SITE_CONTENT_KO = {
     [
       "W1 TUE",
       "공개 score만 · 기본 60 + 도전 40",
-      "공개 맵 4개. 참고 BFS 사용 허용."
+      "직접 구현한 BFS 필요. 참고 BFS는 탈출 시 게임 점수 50점만 인정."
     ],
     [
       "W1 THU",
@@ -426,13 +428,14 @@ window.SITE_CONTENT_KO = {
     [
       "W3 TUE",
       "hidden score만 · LOW/HIGH 50:50",
-      "hidden 최종 평가. LOW/HIGH 동일 비중."
+      "전체 성적의 25%. hidden test의 LOW/HIGH 평균 동일 비중."
     ]
   ],
   "submissionRules": [
     "실행은 --agent agent.py, 수정·제출은 student_policy.py 하나입니다. 공식 고정 파일로 재실행합니다.",
     "agent.py, policy_helpers.py, 엔진, 맵, 테스트, 설정 파일은 수정하지 마세요.",
-    "에이전트는 파일, 네트워크, 서브프로세스, 외부 패키지에 접근해서는 안 됩니다."
+    "에이전트는 파일, 네트워크, 서브프로세스, 외부 패키지에 접근해서는 안 됩니다.",
+    "1주차 화요일: 직접 구현한 bfs_path()를 사용하고 USE_MY_BFS=True로 설정해야 추가 점수를 인정합니다. 참고 BFS만 사용하면 맵당 탈출 시 게임 점수 50점, 실패 시 0점입니다."
   ],
   "integrityRules": [
     "2인 팀으로 진행하며 다른 팀과 코드를 공유하지 않습니다.",
@@ -451,7 +454,7 @@ window.SITE_CONTENT_KO = {
       "focus": "BFS · 경로 복원 · 순이익 = 가치 − 추가 에너지",
       "repositoryUrl": "dist/week1_tuesday.zip",
       "objectives": [
-        "BFS 경로 복원을 학습하며 참고 BFS 사용 자체의 감점은 없습니다.",
+        "1주차 화요일: 직접 구현한 bfs_path()를 사용하고 USE_MY_BFS=True로 설정해야 추가 점수를 인정합니다. 참고 BFS만 사용하면 맵당 탈출 시 게임 점수 50점, 실패 시 0점입니다.",
         "가치와 추가 에너지를 비교해 수집·목표를 선택합니다.",
         "여러 보물을 함께 계획해 두 도전 맵의 score를 개선합니다."
       ],
@@ -460,8 +463,8 @@ window.SITE_CONTENT_KO = {
       ],
       "evaluation": {
         "label": "공개 score 평가",
-        "title": "공개 맵 4개. 참고 BFS 사용 허용.",
-        "text": "공개 grading.json의 B·T로 기본 60/도전 40 환산. 구현·노트·실험 별도 배점 없음."
+        "title": "직접 구현한 BFS 필요. 참고 BFS는 탈출 시 게임 점수 50점만 인정.",
+        "text": "보물 가치·남은 에너지 점수는 직접 구현한 BFS를 실제로 사용할 때만 인정합니다. grade.py가 B/T 환산 전에 적용합니다. 게임 점수 50점은 과제 성적 50/100점이 아닙니다."
       }
     },
     {
@@ -553,17 +556,18 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "hidden 최종 평가",
         "title": "hidden 최종 평가. LOW/HIGH 동일 비중.",
-        "text": "최종 평가값은 게임 score 단위이며 100점 환산값이 아닙니다. 공개 연습·발표 미채점."
+        "text": "최종 평가값은 게임 score 단위이며 100점 환산값이 아닙니다. 공개 연습은 hidden test 점수에 포함하지 않습니다. 전체 성적의 25%이며, 목요일 최종 발표는 별도 15%입니다."
       }
     }
   ],
   "stageRules": [
     [
-      "BFS 경로 복원을 학습하며 참고 BFS 사용 자체의 감점은 없습니다.",
+      "1주차 화요일: 직접 구현한 bfs_path()를 사용하고 USE_MY_BFS=True로 설정해야 추가 점수를 인정합니다. 참고 BFS만 사용하면 맵당 탈출 시 게임 점수 50점, 실패 시 0점입니다.",
       "가치와 추가 에너지를 비교해 수집·목표를 선택합니다.",
       "여러 보물을 함께 계획해 두 도전 맵의 score를 개선합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
-      "공식 성적은 grade.py. hidden map 없음."
+      "공식 성적은 grade.py. hidden map 없음.",
+      "보물 가치·남은 에너지 점수는 직접 구현한 BFS를 실제로 사용할 때만 인정합니다. grade.py가 B/T 환산 전에 적용합니다. 게임 점수 50점은 과제 성적 50/100점이 아닙니다."
     ],
     [
       "보물 부분집합과 방문 순서를 고릅니다. DP·가지치기로 score를 개선할 수 있습니다.",
