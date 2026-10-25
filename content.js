@@ -1,6 +1,6 @@
 // Release switches are unchanged. Locked ZIPs stay excluded from Pages.
 window.RELEASES = {
-  "week1_tuesday": false,
+  "week1_tuesday": true,
   "week1_thursday": false,
   "week2_tuesday": false,
   "week2_thursday": false,
