@@ -25,7 +25,9 @@ assert.equal(created.status, 0, created.stderr || String(created.error));
 function site(flags = {}, extra = '') {
   const folder = fs.mkdtempSync(path.join(scratch, 'web-'));
   for (const name of [...STATIC, 'content.js']) fs.copyFileSync(path.join(ROOT, name), path.join(folder, name));
-  fs.appendFileSync(path.join(folder, 'content.js'), `\nObject.assign(window.RELEASES, ${JSON.stringify(flags)});\n${extra}\n`);
+  // Keep test scenarios independent of the current classroom release schedule.
+  const releases = { ...Object.fromEntries(IDS.map(id => [id, false])), week1_tuesday: true, ...flags };
+  fs.appendFileSync(path.join(folder, 'content.js'), `\nObject.assign(window.RELEASES, ${JSON.stringify(releases)});\napplyReleaseSwitches();\n${extra}\n`);
   return folder;
 }
 
@@ -39,13 +41,16 @@ function publicData(output) {
   return JSON.parse(JSON.stringify(context.window));
 }
 
-test('initial browser configuration opens only Week 1 Tuesday in BOTH languages', () => {
-  const raw = loadContent(path.join(ROOT, 'content.js'));
-  const context = vm.createContext({ window: {} });
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'content.js'), 'utf8'), context);
-  for (const key of ['SITE_CONTENT', 'SITE_CONTENT_KO']) {
-    assert.deepEqual(raw[key].stages.map(s => s.unlocked), [true, false, false, false, false]);
-    assert.deepEqual(JSON.parse(JSON.stringify(context.window[key].stages.map(s => s.unlocked))), [true, false, false, false, false]);
+test('browser and build configurations follow release switches in BOTH languages', () => {
+  for (const root of [ROOT, site(), site({ week1_tuesday: false, week3_tuesday: true })]) {
+    const raw = loadContent(path.join(root, 'content.js'));
+    const expected = IDS.map(id => raw.RELEASES[id]);
+    const context = vm.createContext({ window: {} });
+    vm.runInContext(fs.readFileSync(path.join(root, 'content.js'), 'utf8'), context);
+    for (const key of ['SITE_CONTENT', 'SITE_CONTENT_KO']) {
+      assert.deepEqual(raw[key].stages.map(s => s.unlocked), expected);
+      assert.deepEqual(JSON.parse(JSON.stringify(context.window[key].stages.map(s => s.unlocked))), expected);
+    }
   }
 });
 
