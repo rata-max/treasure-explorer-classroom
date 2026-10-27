@@ -54,12 +54,18 @@ test('browser and build configurations follow release switches in BOTH languages
   }
 });
 
-test('Week 2 assessment is hidden while public commands explicitly select practice', () => {
+test('test sessions are hidden and use --practice; exercise sessions use public grade.py', () => {
   const raw = loadContent(path.join(ROOT, 'content.js'));
   for (const key of ['SITE_CONTENT', 'SITE_CONTENT_KO']) {
-    for (const i of [2,3]) {
+    for (const i of [2, 4]) {
       assert.equal(raw[key].stageCommands[i], 'python grade.py --practice');
       assert.match(raw[key].stages[i].evaluation.label, /HIDDEN|비공개/);
+    }
+    for (const i of [0, 1, 3]) {
+      assert.equal(raw[key].stageCommands[i], 'python grade.py');
+      assert.match(raw[key].stages[i].evaluation.label, /PUBLIC|공개 score/);
+    }
+    for (const i of [1, 2, 3, 4]) {
       assert.match(raw[key].stages[i].evaluation.text, /60/);
       assert.match(raw[key].stages[i].evaluation.text, /40/);
     }

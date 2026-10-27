@@ -9,7 +9,6 @@ ROOT_FILES = {
     "README.md", "README_EN.md", "STUDENT_GUIDE.md", "STUDENT_GUIDE_KO.md",
     "GRADING.md", "GRADING_EN.md", "agent.py", "student_policy.py", "policy_helpers.py",
     "grade.py", "score_grading.py", "grading.json", "learning_checks.py",
-    "baselines.py", "evaluate.py", "intro_ko.pptx",
 }
 REQUIRED = {"README.md", "student_policy.py", "agent.py", "grade.py", "score_grading.py",
             "grading.json", "treasure_explorer/__init__.py", "treasure_explorer/__main__.py",
