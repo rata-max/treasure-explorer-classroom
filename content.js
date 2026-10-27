@@ -132,7 +132,7 @@ window.SITE_CONTENT = {
   "integrityRules": [
     "Work in a team of two. Do not share code with other teams.",
     "Use the current introduction and distributed API/specification. No Week 6/7 materials, AI or web searches.",
-    "Do not reuse or rewrite your team's earlier code from THIS project. Earlier concepts may inform a new implementation.",
+    "Do not copy from earlier code of THIS project (your own team's included) kept open beside you. Recalling the ideas and writing the code again is allowed.",
     "Do not publish answers before grading ends, or identify maps/seeds through hardcoding or side channels."
   ],
   "stages": [
@@ -429,7 +429,7 @@ window.SITE_CONTENT_KO = {
   "integrityRules": [
     "2인 팀으로 진행하며 다른 팀과 코드를 공유하지 않습니다.",
     "당회차 소개 자료와 배포 명세·API만 참고합니다. 기존 Week 6·7 자료·AI·웹 검색은 금지합니다.",
-    "이번 프로젝트의 이전 회차 코드 재사용·재작성은 금지합니다. 이전 개념은 새 구현의 아이디어로 활용할 수 있습니다.",
+    "이번 프로젝트의 이전 회차 코드(우리 팀 코드 포함)를 옆에 띄워 놓고 보면서 옮겨 쓰는 것은 금지합니다. 배운 개념을 떠올려 새로 작성하는 것은 괜찮습니다.",
     "채점 전 답안 공개, 맵·좌표·시드 하드코딩과 사이드 채널 이용은 금지합니다."
   ],
   "stages": [
