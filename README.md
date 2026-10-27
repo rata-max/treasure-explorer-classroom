@@ -54,3 +54,5 @@ node scripts/build_site.mjs --source C:\path\to\treasure-explorer-challenge
 2·3주차 학생용 공개 연습은 `python grade.py --practice`이며 최종 성적에 반영하지 않습니다.
 실제 비공개 맵·세트·B·T·시드·성적 보고서는 이 저장소와 학생 ZIP에 포함하지 않습니다.
 최종 발표는 교과목 전체 성적의 별도 15%입니다.
+
+1·2주차는 각 평가 단위의 탈출에 50%, B·T 기준 개선도에 50%를 부여합니다. 기본/도전 그룹 비중은 60/40이며, 참고 BFS로 1주차 화요일 네 맵을 모두 탈출하면 과제 성적 50/100점입니다. 원본 저장소의 `tools/sync_releases.py --build-zips`가 같은 채점기를 모든 회차와 ZIP에 동기화하며, Pages 빌드가 공개 스위치에 따라 해당 ZIP을 연결합니다.

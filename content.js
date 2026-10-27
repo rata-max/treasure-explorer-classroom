@@ -1,4 +1,5 @@
-// Release switches are unchanged. Locked ZIPs stay excluded from Pages.
+// Set these switches to true immediately before releasing each assignment.
+// Locked ZIPs are excluded from the deployed Pages artifact.
 window.RELEASES = {
   "week1_tuesday": false,
   "week1_thursday": false,
@@ -98,22 +99,22 @@ window.SITE_CONTENT = {
     [
       "W1 TUE",
       "Public score only · Basic 60 + challenge 40",
-      "Own BFS required for additional points. Reference BFS: exit bonus only (50 game points)."
+      "Own BFS required for additional points. Reference BFS: exit bonus only (50 game points). Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "W1 THU",
       "Public score only · Basic 60 + challenge 40",
-      "Eight public maps; improve subsets and order."
+      "Eight public maps; improve subsets and order. Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "W2 TUE",
       "Hidden score only · Basic 60 + challenge 40",
-      "Ten public weighted maps are practice. The instructor holds the final maps privately."
+      "Ten public weighted maps are practice. The instructor holds the final maps privately. Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "W2 THU",
       "Hidden score only · Basic 60 + challenge 40",
-      "Fourteen public maps are practice. Average hidden LOW/HIGH pairs before conversion."
+      "Fourteen public maps are practice. Average hidden LOW/HIGH pairs before conversion. Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "W3 TUE",
@@ -125,7 +126,7 @@ window.SITE_CONTENT = {
     "Run with --agent agent.py; edit and submit only student_policy.py. Official fixed files are used for grading.",
     "Do not modify agent.py, policy_helpers.py, the engine, maps, tests, or configuration files.",
     "The agent must not access files, networks, subprocesses, or external packages.",
-    "Week 1 Tuesday: implement and use your own bfs_path() and set USE_MY_BFS=True to earn additional points. Reference BFS only: 50 game points per map on exit, otherwise 0."
+    "Week 1 Tuesday: implement and use your own bfs_path() with USE_MY_BFS=True for improvement credit. Reference BFS earns 50/100 assignment marks if all four maps are exited."
   ],
   "integrityRules": [
     "Work in a team of two. Do not share code with other teams.",
@@ -139,12 +140,12 @@ window.SITE_CONTENT = {
       "week": "WEEK 1",
       "day": "TUESDAY",
       "title": "TREE PLANNING FOUNDATIONS ★★",
-      "unlocked": true,
+      "unlocked": false,
       "tagline": "Learn BFS and decide which treasure detours pay.",
       "focus": "BFS · Path recovery · Profit = value − extra energy",
-      "repositoryUrl": "dist/week1_tuesday.zip",
+      "repositoryUrl": null,
       "objectives": [
-        "Week 1 Tuesday: implement and use your own bfs_path() and set USE_MY_BFS=True to earn additional points. Reference BFS only: 50 game points per map on exit, otherwise 0.",
+        "Week 1 Tuesday: implement and use your own bfs_path() with USE_MY_BFS=True for improvement credit. Reference BFS earns 50/100 assignment marks if all four maps are exited.",
         "Choose collection and targets from value minus extra energy.",
         "Improve the two challenge maps by jointly planning treasures."
       ],
@@ -153,8 +154,8 @@ window.SITE_CONTENT = {
       ],
       "evaluation": {
         "label": "PUBLIC SCORE",
-        "title": "Own BFS required for additional points. Reference BFS: exit bonus only (50 game points).",
-        "text": "Treasure-value and remaining-energy points count only with your own BFS in use. grade.py applies this rule before B/T conversion. 50 game points do not mean 50/100 assignment marks."
+        "title": "Reference BFS, four successful exits: 50/100 assignment marks.",
+        "text": "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40. Reference-BFS runs keep an assessed game score of 50 on exit, or 0 on failure. They earn only each map's escape credit."
       }
     },
     {
@@ -177,7 +178,7 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "PUBLIC SCORE",
         "title": "Eight public maps; improve subsets and order.",
-        "text": "Published B/T anchors, basic 60/challenge 40. No separate implementation, note or experiment marks."
+        "text": "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40. B/T anchors are published. No separate marks for notes, experiments or code quality."
       }
     },
     {
@@ -200,7 +201,7 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "HIDDEN SCORE",
         "title": "Ten public maps are practice. Only hidden maps count toward the final grade.",
-        "text": "Private final B/T anchors, basic 60/challenge 40, out of 100. Public grade.py --practice does not count."
+        "text": "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40. Final B/T anchors are private. Public grade.py --practice is ungraded practice."
       }
     },
     {
@@ -223,7 +224,7 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "HIDDEN SCORE",
         "title": "Fourteen public maps are practice. Only hidden maps count toward the final grade.",
-        "text": "Basic 60/challenge 40, out of 100. Terrain, exit and treasure positions remain visible. Values appear on arrival."
+        "text": "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40. LOW/HIGH pairs use mean game score for improvement and the fraction of successful exits for escape credit."
       }
     },
     {
@@ -252,33 +253,37 @@ window.SITE_CONTENT = {
   ],
   "stageRules": [
     [
-      "Week 1 Tuesday: implement and use your own bfs_path() and set USE_MY_BFS=True to earn additional points. Reference BFS only: 50 game points per map on exit, otherwise 0.",
+      "Week 1 Tuesday: implement and use your own bfs_path() with USE_MY_BFS=True for improvement credit. Reference BFS earns 50/100 assignment marks if all four maps are exited.",
       "Choose collection and targets from value minus extra energy.",
       "Improve the two challenge maps by jointly planning treasures.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Official grade: grade.py. No hidden maps.",
-      "Treasure-value and remaining-energy points count only with your own BFS in use. grade.py applies this rule before B/T conversion. 50 game points do not mean 50/100 assignment marks."
+      "Reference-BFS runs keep an assessed game score of 50 on exit, or 0 on failure. They earn only each map's escape credit.",
+      "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "Choose a treasure subset and visit order; DP/pruned search can improve scores.",
       "A worked state example is provided; heuristics earn their achieved scores.",
       "Whole-map limit is 10 seconds, with no separate algorithm or note marks.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
-      "Official grade: grade.py. No hidden maps."
+      "Official grade: grade.py. No hidden maps.",
+      "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "Plan with entry energy costs instead of hop counts.",
       "Combine subset and visit-order planning with weighted costs.",
       "Final maps are unseen. Terrain, exit and treasure values remain visible during each run.",
       "Use one generic student_policy.py for all maps. Do not hardcode map identification.",
-      "Public practice: grade.py --practice. The instructor runs the private final suite."
+      "Public practice: grade.py --practice. The instructor runs the private final suite.",
+      "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "Estimate unrevealed values and update plans after observations.",
       "One LOW/HIGH type applies to the whole map. Include the cost of acquiring information.",
       "Average each final LOW/HIGH challenge pair before applying its private B/T anchors.",
       "Use one generic student_policy.py for all maps. Do not hardcode map identification.",
-      "Public practice: grade.py --practice. The instructor runs the private final suite."
+      "Public practice: grade.py --practice. The instructor runs the private final suite.",
+      "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
       "Extend the observed-value policy to fog and an unknown exit.",
@@ -393,22 +398,22 @@ window.SITE_CONTENT_KO = {
     [
       "W1 TUE",
       "공개 score만 · 기본 60 + 도전 40",
-      "직접 구현한 BFS 필요. 참고 BFS는 탈출 시 게임 점수 50점만 인정."
+      "직접 구현한 BFS 필요. 참고 BFS는 탈출 시 게임 점수 50점만 인정. 각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W1 THU",
       "공개 score만 · 기본 60 + 도전 40",
-      "공개 맵 8개. 부분집합·방문 순서 개선."
+      "공개 맵 8개. 부분집합·방문 순서 개선. 각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W2 TUE",
       "비공개 score 평가 · 기본 60 + 도전 40",
-      "공개 가중 맵 10개는 연습용. 최종 맵은 교수자가 비공개 보관."
+      "공개 가중 맵 10개는 연습용. 최종 맵은 교수자가 비공개 보관. 각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W2 THU",
       "비공개 score 평가 · 기본 60 + 도전 40",
-      "공개 맵 14개는 연습용. 최종 LOW/HIGH 쌍은 평균 후 환산."
+      "공개 맵 14개는 연습용. 최종 LOW/HIGH 쌍은 평균 후 환산. 각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W3 TUE",
@@ -420,7 +425,7 @@ window.SITE_CONTENT_KO = {
     "실행은 --agent agent.py, 수정·제출은 student_policy.py 하나입니다. 공식 고정 파일로 재실행합니다.",
     "agent.py, policy_helpers.py, 엔진, 맵, 테스트, 설정 파일은 수정하지 마세요.",
     "에이전트는 파일, 네트워크, 서브프로세스, 외부 패키지에 접근해서는 안 됩니다.",
-    "1주차 화요일: 직접 구현한 bfs_path()를 사용하고 USE_MY_BFS=True로 설정해야 추가 점수를 인정합니다. 참고 BFS만 사용하면 맵당 탈출 시 게임 점수 50점, 실패 시 0점입니다."
+    "1주차 화요일: 직접 구현한 bfs_path()를 USE_MY_BFS=True로 사용해야 개선 점수를 받습니다. 참고 BFS로 네 맵을 모두 탈출하면 과제 성적 50/100점입니다."
   ],
   "integrityRules": [
     "2인 팀으로 진행하며 다른 팀과 코드를 공유하지 않습니다.",
@@ -434,12 +439,12 @@ window.SITE_CONTENT_KO = {
       "week": "1주차",
       "day": "화요일",
       "title": "트리 계획 기초 ★★",
-      "unlocked": true,
+      "unlocked": false,
       "tagline": "BFS를 학습하고 이득인 보물 우회를 판단하세요.",
       "focus": "BFS · 경로 복원 · 순이익 = 가치 − 추가 에너지",
-      "repositoryUrl": "dist/week1_tuesday.zip",
+      "repositoryUrl": null,
       "objectives": [
-        "1주차 화요일: 직접 구현한 bfs_path()를 사용하고 USE_MY_BFS=True로 설정해야 추가 점수를 인정합니다. 참고 BFS만 사용하면 맵당 탈출 시 게임 점수 50점, 실패 시 0점입니다.",
+        "1주차 화요일: 직접 구현한 bfs_path()를 USE_MY_BFS=True로 사용해야 개선 점수를 받습니다. 참고 BFS로 네 맵을 모두 탈출하면 과제 성적 50/100점입니다.",
         "가치와 추가 에너지를 비교해 수집·목표를 선택합니다.",
         "여러 보물을 함께 계획해 두 도전 맵의 score를 개선합니다."
       ],
@@ -448,8 +453,8 @@ window.SITE_CONTENT_KO = {
       ],
       "evaluation": {
         "label": "공개 score 평가",
-        "title": "직접 구현한 BFS 필요. 참고 BFS는 탈출 시 게임 점수 50점만 인정.",
-        "text": "보물 가치·남은 에너지 점수는 직접 구현한 BFS를 실제로 사용할 때만 인정합니다. grade.py가 B/T 환산 전에 적용합니다. 게임 점수 50점은 과제 성적 50/100점이 아닙니다."
+        "title": "참고 BFS로 네 맵 모두 탈출: 과제 성적 50/100점.",
+        "text": "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 참고 BFS 실행은 탈출 시 인정 게임 score 50점, 실패 시 0점입니다. 각 맵의 탈출 점수만 인정합니다."
       }
     },
     {
@@ -472,7 +477,7 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "공개 score 평가",
         "title": "공개 맵 8개. 부분집합·방문 순서 개선.",
-        "text": "공개 grading.json의 B·T로 기본 60/도전 40 환산. 구현·노트·실험 별도 배점 없음."
+        "text": "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. B·T는 공개하며 노트·실험·코드 품질의 별도 배점은 없습니다."
       }
     },
     {
@@ -495,7 +500,7 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "비공개 score 평가",
         "title": "공개 10개는 연습용. 최종 성적은 비공개 맵만 반영.",
-        "text": "최종 비공개 B·T로 기본 60/도전 40, 100점 환산. 공개 grade.py --practice는 성적에 미반영."
+        "text": "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 최종 B·T는 비공개입니다. 공개 grade.py --practice는 연습용입니다."
       }
     },
     {
@@ -518,7 +523,7 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "비공개 score 평가",
         "title": "공개 14개는 연습용. 최종 성적은 비공개 맵만 반영.",
-        "text": "기본 60/도전 40의 100점 환산 유지. 지형·출구·보물 위치 공개, 가치는 도착 시 공개."
+        "text": "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. LOW/HIGH 쌍은 평균 게임 score로 개선도를, 두 실행의 성공 비율로 탈출 점수를 계산합니다."
       }
     },
     {
@@ -547,33 +552,37 @@ window.SITE_CONTENT_KO = {
   ],
   "stageRules": [
     [
-      "1주차 화요일: 직접 구현한 bfs_path()를 사용하고 USE_MY_BFS=True로 설정해야 추가 점수를 인정합니다. 참고 BFS만 사용하면 맵당 탈출 시 게임 점수 50점, 실패 시 0점입니다.",
+      "1주차 화요일: 직접 구현한 bfs_path()를 USE_MY_BFS=True로 사용해야 개선 점수를 받습니다. 참고 BFS로 네 맵을 모두 탈출하면 과제 성적 50/100점입니다.",
       "가치와 추가 에너지를 비교해 수집·목표를 선택합니다.",
       "여러 보물을 함께 계획해 두 도전 맵의 score를 개선합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "공식 성적은 grade.py. hidden map 없음.",
-      "보물 가치·남은 에너지 점수는 직접 구현한 BFS를 실제로 사용할 때만 인정합니다. grade.py가 B/T 환산 전에 적용합니다. 게임 점수 50점은 과제 성적 50/100점이 아닙니다."
+      "참고 BFS 실행은 탈출 시 인정 게임 score 50점, 실패 시 0점입니다. 각 맵의 탈출 점수만 인정합니다.",
+      "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "보물 부분집합과 방문 순서를 고릅니다. DP·가지치기로 score를 개선할 수 있습니다.",
       "상태 설계 예제를 제공하며 휴리스틱도 얻은 score로 평가합니다.",
       "맵 전체 10초 제한. 구현 방법·설계 노트의 별도 배점은 없습니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
-      "공식 성적은 grade.py. hidden map 없음."
+      "공식 성적은 grade.py. hidden map 없음.",
+      "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "이동 횟수 대신 지형별 에너지 비용으로 판단합니다.",
       "부분집합·방문 순서 계획을 가중 비용과 결합합니다.",
       "평가 맵은 비공개지만 실행 중 지형·출구·보물 값은 모두 공개됩니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
-      "공개 연습: grade.py --practice. 최종 비공개 평가는 교수자가 실행합니다."
+      "공개 연습: grade.py --practice. 최종 비공개 평가는 교수자가 실행합니다.",
+      "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "미공개 가치를 추정하고 관측 후 계획을 갱신합니다.",
       "맵 전체에 LOW/HIGH 유형 하나를 적용합니다. 정보 수집의 비용도 고려합니다.",
       "최종 도전 LOW/HIGH 쌍은 평균 score를 구한 뒤 비공개 B·T로 환산합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
-      "공개 연습: grade.py --practice. 최종 비공개 평가는 교수자가 실행합니다."
+      "공개 연습: grade.py --practice. 최종 비공개 평가는 교수자가 실행합니다.",
+      "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "이전 가치 판단을 안개와 출구 미확인 상황으로 확장합니다.",
