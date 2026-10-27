@@ -1,7 +1,7 @@
 // Set these switches to true immediately before releasing each assignment.
 // Locked ZIPs are excluded from the deployed Pages artifact.
 window.RELEASES = {
-  "week1_tuesday": false,
+  "week1_tuesday": true,
   "week1_thursday": false,
   "week2_tuesday": false,
   "week2_thursday": false,
