@@ -114,7 +114,7 @@ window.SITE_CONTENT = {
     [
       "W2 THU",
       "Public score only · Basic 60 + challenge 40",
-      "Dijkstra exercise. Six public maps with mud (4) and water (7); write Dijkstra from scratch, the plan search is provided. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra exercise. Six public maps with mud (4) and water (7); finish the Dijkstra frame, the plan search is provided. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
       "W3 TUE",
@@ -170,7 +170,7 @@ window.SITE_CONTENT = {
       "focus": "BFS · Design the plan yourself · Public score",
       "repositoryUrl": null,
       "objectives": [
-        "bfs_distances: write the whole BFS yourself. One BFS gives the distance to every cell.",
+        "bfs_distances: finish the BFS frame; the neighbours of each cell are yours. One BFS gives the distance to every cell.",
         "plan_cost: the energy one plan needs.",
         "choose_targets: a starter (nearest treasure first) is given and loses points. Find out why, then return the plan with the highest score."
       ],
@@ -193,7 +193,7 @@ window.SITE_CONTENT = {
       "focus": "BFS · Search with pruning · Hidden maps",
       "repositoryUrl": null,
       "objectives": [
-        "Write bfs_distances from scratch and choose_targets from the search outline.",
+        "Write bfs_distances from its first two lines and choose_targets from the search outline.",
         "Stop extending a plan as soon as it can no longer reach the exit. A map over 10 seconds scores 0.",
         "Hidden maps: unit cost, basic up to 8 treasures, challenge 11-12, dead-end exit."
       ],
@@ -216,7 +216,7 @@ window.SITE_CONTENT = {
       "focus": "Dijkstra · Priority queue · Plan search provided",
       "repositoryUrl": null,
       "objectives": [
-        "Write the whole dijkstra_distances yourself, with heapq and TERRAIN_COST.",
+        "Finish dijkstra_distances: the heap and the loop are given; the neighbour updates (TERRAIN_COST) are yours.",
         "plan_cost and choose_targets are provided (every plan, up to 8 treasures).",
         "Compare: with BFS distances the plan underestimates the energy it needs."
       ],
@@ -264,21 +264,21 @@ window.SITE_CONTENT = {
       "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
-      "Write bfs_distances from scratch (up, down, left, right, walls, map borders), then plan_cost. With both done, the given starter already runs.",
+      "Finish bfs_distances (up, down, left, right, walls, map borders), then plan_cost. With both done, the given starter already runs.",
       "choose_targets: watch with --view why the starter (nearest treasure first) loses points, then design a better method. A plan must never need more energy than you have.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Official grade: grade.py. No hidden maps.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
-      "Write bfs_distances from scratch and choose_targets from the search outline.",
+      "Write bfs_distances from its first two lines and choose_targets from the search outline.",
       "Challenge maps have 11-12 treasures: prune plans that can no longer reach the exit. Over 10 seconds = 0 for that map.",
       "Public maps are practice: grade.py --practice. The instructor runs the hidden maps.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
-      "Write the whole dijkstra_distances with heapq; there are no blanks to fill.",
+      "Finish dijkstra_distances: the heap and the loop are given; the neighbour updates are yours.",
       "plan_cost and choose_targets are provided.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Official grade: grade.py. No hidden maps.",
@@ -412,7 +412,7 @@ window.SITE_CONTENT_KO = {
     [
       "W2 THU",
       "공개 score만 · 기본 60 + 도전 40",
-      "Dijkstra 연습. 진흙(4)·물(7)이 있는 공개 맵 6개. Dijkstra는 처음부터 직접 작성하고, 계획 탐색은 제공합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 연습. 진흙(4)·물(7)이 있는 공개 맵 6개. Dijkstra 틀에서 이웃 칸 처리를 직접 작성하고, 계획 탐색은 제공합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W3 TUE",
@@ -468,7 +468,7 @@ window.SITE_CONTENT_KO = {
       "focus": "BFS · 계획 방법 직접 설계 · 공개 score",
       "repositoryUrl": null,
       "objectives": [
-        "bfs_distances: BFS 전체를 직접 작성합니다. BFS 한 번으로 모든 칸까지의 거리를 구합니다.",
+        "bfs_distances: BFS 틀에서 칸마다 이웃 처리를 직접 작성합니다. BFS 한 번으로 모든 칸까지의 거리를 구합니다.",
         "plan_cost: 계획 하나에 드는 에너지를 계산합니다.",
         "choose_targets: 점수를 잃는 시작 코드(가장 가까운 보물부터)가 주어집니다. 이유를 찾아 점수가 가장 높은 계획을 돌려줍니다."
       ],
@@ -491,7 +491,7 @@ window.SITE_CONTENT_KO = {
       "focus": "BFS · 가지치기 탐색 · 비공개 맵",
       "repositoryUrl": null,
       "objectives": [
-        "bfs_distances는 처음부터, choose_targets는 search 틀을 보고 작성합니다.",
+        "bfs_distances는 첫 두 줄부터, choose_targets는 search 틀을 보고 작성합니다.",
         "출구에 갈 수 없게 된 계획은 더 늘리지 않습니다. 10초를 넘긴 맵은 0점입니다.",
         "비공개 맵: 지형 비용 1, 기본 맵 보물 8개 이하, 도전 맵 11~12개, 막다른 출구."
       ],
@@ -514,7 +514,7 @@ window.SITE_CONTENT_KO = {
       "focus": "Dijkstra · 우선순위 큐 · 계획 탐색 제공",
       "repositoryUrl": null,
       "objectives": [
-        "heapq와 TERRAIN_COST로 dijkstra_distances 전체를 직접 작성합니다.",
+        "dijkstra_distances: 힙과 반복문 틀이 주어지고, 이웃 칸 처리(TERRAIN_COST)를 직접 작성합니다.",
         "plan_cost와 choose_targets(모든 계획 비교, 보물 최대 8개)는 제공합니다.",
         "비교: BFS 거리를 쓰면 계획이 필요한 에너지를 실제보다 적게 잡습니다."
       ],
@@ -562,21 +562,21 @@ window.SITE_CONTENT_KO = {
       "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "bfs_distances를 처음부터 작성하고(상하좌우, 벽, 맵 범위) plan_cost를 작성합니다. 둘을 끝내면 주어진 시작 코드가 동작합니다.",
+      "bfs_distances의 이웃 처리(상하좌우, 벽, 맵 범위)를 작성하고 plan_cost를 작성합니다. 둘을 끝내면 주어진 시작 코드가 동작합니다.",
       "choose_targets: 시작 코드(가장 가까운 보물부터)가 왜 점수를 잃는지 --view로 찾고 더 나은 방법을 설계합니다. 가진 에너지보다 많이 드는 계획은 안 됩니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "공식 성적은 grade.py. hidden map 없음.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "bfs_distances는 처음부터, choose_targets는 search 틀을 보고 작성합니다.",
+      "bfs_distances는 첫 두 줄부터, choose_targets는 search 틀을 보고 작성합니다.",
       "도전 맵은 보물 11~12개: 출구에 갈 수 없게 된 계획은 버립니다(가지치기). 10초를 넘긴 맵은 0점입니다.",
       "공개 맵은 연습용: grade.py --practice. 비공개 맵 채점은 교수자가 실행합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "heapq로 dijkstra_distances 전체를 직접 작성합니다. 채울 빈칸은 없습니다.",
+      "dijkstra_distances: 힙과 반복문 틀에서 이웃 칸 처리를 직접 작성합니다.",
       "plan_cost와 choose_targets는 제공합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "공식 성적은 grade.py. hidden map 없음.",
