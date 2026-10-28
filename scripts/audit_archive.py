@@ -36,7 +36,8 @@ def audit(filename):
             allowed = len(parts) == 1 and name in ROOT_FILES
             if len(parts) == 2:
                 allowed = ((parts[0] == "maps" and name.endswith(".json"))
-                           or (parts[0] in {"tests", "treasure_explorer"} and name.endswith(".py")))
+                           or (parts[0] in {"tests", "treasure_explorer"} and name.endswith(".py"))
+                           or name == ".vscode/settings.json")  # switches off code completion
             if not allowed:
                 raise ValueError("archive contains a non-student file")
         if not REQUIRED.issubset(names) or not any(n.startswith("maps/") for n in names):

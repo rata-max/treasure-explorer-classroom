@@ -58,8 +58,9 @@ node scripts/build_site.mjs --source C:\path\to\treasure-explorer-challenge
 | 2주차 목 | 연습 | 진흙·물 → Dijkstra (계획 탐색 제공) | 공개 맵 `python grade.py` |
 | 3주차 화 | 테스트 | Dijkstra + 가지치기 탐색 | 비공개 맵 (학생은 `--practice`) |
 
-연습 회차는 뼈대 코드의 빈칸을 채우고, 테스트 회차는 함수 틀과 단계 설명을 보고 직접 작성합니다.
-도우미 이름(`neighbors`, `entry_cost`, `COLLECT_COST`, `distance_table`)은 모든 회차에서 같습니다.
+연습 회차는 TODO 함수를 처음부터 작성하고(1주차 목은 점수를 잃는 시작 코드를 개선), 테스트 회차는 `search` 틀만 보고 직접 작성합니다.
+이웃 칸 도우미는 없고, `policy_helpers.py`의 상수(`TERRAIN_COST`, `COLLECT_COST`)와 `distance_table`은 모든 회차에서 같습니다.
+학생 ZIP의 `.vscode/settings.json`은 자동완성과 Copilot을 끕니다(`scripts/audit_archive.py`가 `.vscode` 안에서는 이 파일만 허용).
 모든 회차: 맵마다 탈출 50% + B·T 개선 50%, 기본 60 / 도전 40. 1주차 화요일 배포본은 원본 저장소에서 동결되어
 이전과 같은 ZIP이 다시 만들어집니다.
 
