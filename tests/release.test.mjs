@@ -149,6 +149,16 @@ test('workflow never runs PR code with the private source key or uploads a check
   assert.match(workflow, /python \.private-source\/tools\/sync_releases\.py --build-zips/);
 });
 
+test('archive auditor accepts the VS Code settings file and nothing else under .vscode', () => {
+  for (const [entry, ok] of [['.vscode/settings.json', true], ['.vscode/launch.json', false], ['.vscode/tasks.json', false]]) {
+    const filename = path.join(scratch, `vscode-${cryptoIndex++}.zip`);
+    const made = spawnSync(python, ['-c', "import sys,zipfile; source=zipfile.ZipFile(sys.argv[1]); out=zipfile.ZipFile(sys.argv[2],'w'); [out.writestr(e,source.read(e.filename)) for e in source.infolist()]; out.writestr(sys.argv[3],'{}'); out.close(); source.close()", path.join(source, 'dist', `${IDS[0]}.zip`), filename, entry], { encoding: 'utf8' });
+    assert.equal(made.status, 0, made.stderr);
+    const checked = spawnSync(python, [path.join(ROOT, 'scripts/audit_archive.py'), filename], { encoding: 'utf8' });
+    assert.equal(checked.status === 0, ok, `${entry}: ${checked.stderr}`);
+  }
+});
+
 test('archive auditor requires the interactive viewer in student downloads', () => {
   const filename = path.join(scratch, 'missing-viewer.zip');
   const made = spawnSync(python, ['-c', "import sys,zipfile; source=zipfile.ZipFile(sys.argv[1]); out=zipfile.ZipFile(sys.argv[2],'w'); [out.writestr(e,source.read(e.filename)) for e in source.infolist() if e.filename != 'treasure_explorer/viewer_page.py']; out.close(); source.close()", path.join(source, 'dist', `${IDS[0]}.zip`), filename], { encoding: 'utf8' });
