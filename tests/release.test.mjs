@@ -130,7 +130,7 @@ test('output is fresh-only, cannot merge old unlocked ZIPs or write inside priva
 });
 
 test('archive auditor rejects source/history/credentials/path traversal', () => {
-  for (const entry of ['../escape.py', '/absolute.py', 'reference_score_policy.py', '.git/config', 'source_readonly', 'C:/private.key']) {
+  for (const entry of ['../escape.py', '/absolute.py', 'reference_score_policy.py', '.git/config', 'source_readonly', 'C:/private.key', '.vscode/tasks.json', '.vscode/extensions.json', '.vscode/.env', 'instructor/settings.json']) {
     const filename = path.join(scratch, `unsafe-${cryptoIndex++}.zip`);
     const made = spawnSync(python, ['-c', "import sys,zipfile; z=zipfile.ZipFile(sys.argv[1],'w'); z.writestr(sys.argv[2],'not published'); z.close()", filename, entry], { encoding: 'utf8' });
     assert.equal(made.status, 0, made.stderr);
@@ -139,6 +139,14 @@ test('archive auditor rejects source/history/credentials/path traversal', () => 
   }
 });
 let cryptoIndex = 0;
+
+test('archive auditor accepts the provided VS Code settings in a released ZIP', () => {
+  const filename = path.join(scratch, 'with-vscode-settings.zip');
+  const made = spawnSync(python, ['-c', "import sys,zipfile; source=zipfile.ZipFile(sys.argv[1]); out=zipfile.ZipFile(sys.argv[2],'w'); [out.writestr(e,source.read(e.filename)) for e in source.infolist()]; out.writestr('.vscode/settings.json', '{\"chat.disableAIFeatures\": true}'); out.close(); source.close()", path.join(source, 'dist', `${IDS[1]}.zip`), filename], { encoding: 'utf8' });
+  assert.equal(made.status, 0, made.stderr);
+  const checked = spawnSync(python, [path.join(ROOT, 'scripts/audit_archive.py'), filename], { encoding: 'utf8' });
+  assert.equal(checked.status, 0, checked.stderr);
+});
 
 test('workflow never runs PR code with the private source key or uploads a checkout', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/pages.yml'), 'utf8');

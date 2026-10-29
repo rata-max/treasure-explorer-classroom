@@ -35,7 +35,8 @@ def audit(filename):
                 raise ValueError("expanded archive exceeds student-package limit")
             allowed = len(parts) == 1 and name in ROOT_FILES
             if len(parts) == 2:
-                allowed = ((parts[0] == "maps" and name.endswith(".json"))
+                allowed = (name == ".vscode/settings.json"
+                           or (parts[0] == "maps" and name.endswith(".json"))
                            or (parts[0] in {"tests", "treasure_explorer"} and name.endswith(".py")))
             if not allowed:
                 raise ValueError("archive contains a non-student file")
