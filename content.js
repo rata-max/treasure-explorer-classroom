@@ -2,7 +2,7 @@
 // Locked ZIPs are excluded from the deployed Pages artifact.
 window.RELEASES = {
   "week1_tuesday": true,
-  "week1_thursday": false,
+  "week1_thursday": true,
   "week2_tuesday": false,
   "week2_thursday": false,
   "week3_tuesday": false
