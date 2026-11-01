@@ -53,13 +53,16 @@ node scripts/build_site.mjs --source C:\path\to\treasure-explorer-challenge
 | 회차 | 유형 | 새로 생긴 것 | 성적 |
 |---|---|---|---|
 | 1주차 화 | 연습 (완료·동결) | BFS 경로, 보물 하나 (이전 코드 형식) | 공개 맵 |
-| 1주차 목 | 연습 | BFS 거리표 · 여러 보물의 조합과 순서 | 공개 맵 `python grade.py` |
-| 2주차 화 | 테스트 | 도전 맵 보물 11~12개 → 가지치기 탐색 | 비공개 맵 (학생은 `--practice`) |
-| 2주차 목 | 연습 | 진흙·물 → Dijkstra (계획 탐색 제공) | 공개 맵 `python grade.py` |
-| 3주차 화 | 테스트 | Dijkstra + 가지치기 탐색 | 비공개 맵 (학생은 `--practice`) |
+| 1주차 목 | 연습 | BFS 거리표 · 여러 보물의 조합과 순서 (점수를 잃는 시작 코드를 개선) | 공개 맵 `python grade.py` |
+| 2주차 화 | 테스트 | 출구를 여는 열쇠 K → 새 함수 `plan_score` 하나 (보물 7개 이하 + 열쇠) | 비공개 맵 (학생은 `--practice`) |
+| 2주차 목 | 연습 | 진흙·물 → Dijkstra, `plan_cost`·`choose_targets`는 1주차 목처럼 다시 작성 | 공개 맵 `python grade.py` |
+| 3주차 화 | 테스트 | 2주차 목 + 열쇠 → 새 함수 `plan_score` 하나 | 비공개 맵 (학생은 `--practice`) |
 
-연습 회차는 뼈대 코드의 빈칸을 채우고, 테스트 회차는 함수 틀과 단계 설명을 보고 직접 작성합니다.
-도우미 이름(`neighbors`, `entry_cost`, `COLLECT_COST`, `distance_table`)은 모든 회차에서 같습니다.
+각 회차는 바로 앞 회차에 규칙 하나, 함수 하나만 더합니다. 연습 회차는 TODO 함수의 틀(초기값·반복문)에서 핵심을 작성하고
+(1주차 목은 점수를 잃는 시작 코드를 개선), 테스트 회차는 앞 목요일과 같은 틀에 새 함수 `plan_score`를 더하고
+`choose_targets`는 단계 설명만 줍니다. `find_key`와 `distance_table`은 제공합니다.
+이웃 칸 도우미는 없고, `policy_helpers.py`의 상수(`TERRAIN_COST`, `COLLECT_COST`)는 모든 회차에서 같습니다.
+학생 ZIP의 `.vscode/settings.json`은 자동완성과 Copilot을 끕니다(`scripts/audit_archive.py`가 `.vscode` 안에서는 이 파일만 허용).
 모든 회차: 맵마다 탈출 50% + B·T 개선 50%, 기본 60 / 도전 40. 1주차 화요일 배포본은 원본 저장소에서 동결되어
 이전과 같은 ZIP이 다시 만들어집니다.
 

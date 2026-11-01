@@ -25,7 +25,7 @@
         <li><span class="en">Extract the stage ZIP and open the folder containing <code>agent.py</code>, <code>maps/</code>, and <code>treasure_explorer/</code>.</span><span class="ko">단계 ZIP을 압축 해제하고, <code>agent.py</code>, <code>maps/</code>, <code>treasure_explorer/</code>가 있는 폴더를 여세요.</span></li>
         <li><span class="en">Run <code>python -m treasure_explorer --map maps/&lt;map-file&gt;.json --agent agent.py --view</code>.</span><span class="ko"><code>python -m treasure_explorer --map maps/&lt;맵 파일&gt;.json --agent agent.py --view</code>를 실행하세요.</span></li>
         <li><span class="en">Change only the value following <code>--map</code> to test another map.</span><span class="ko">다른 맵을 테스트하려면 <code>--map</code> 뒤의 값만 바꾸세요.</span></li>
-        <li><span class="en"><code>--view</code> animates the run; <code>--delay 0.4</code> slows it; <code>--no-clear</code> keeps every frame.</span><span class="ko"><code>--view</code>는 실행을 애니메이션으로 표시합니다. <code>--delay 0.4</code>는 속도를 늦추고, <code>--no-clear</code>는 모든 프레임을 유지합니다.</span></li>
+        <li><span class="en"><code>--view</code> opens an interactive replay in your browser (play, pause, step, speed). Add <code>--terminal</code> to draw it in the terminal instead, and <code>--no-clear</code> to keep every terminal frame.</span><span class="ko"><code>--view</code>는 브라우저에서 실행을 다시 보는 화면을 엽니다(재생·일시정지·한 단계·속도). <code>--terminal</code>을 더하면 터미널에 그리고, <code>--no-clear</code>를 더하면 터미널의 모든 프레임을 남깁니다.</span></li>
       </ul>
     </div>
     <div>
@@ -34,6 +34,7 @@
         <li><span class="en">PowerShell: <code>Get-ChildItem maps/*.json | ForEach-Object { python -m treasure_explorer --map $_.FullName --agent agent.py }</code></span><span class="ko">PowerShell: <code>Get-ChildItem maps/*.json | ForEach-Object { python -m treasure_explorer --map $_.FullName --agent agent.py }</code></span></li>
         <li><span class="en">Bash/macOS: <code>for map in maps/*.json; do python -m treasure_explorer --map "$map" --agent agent.py; done</code></span><span class="ko">Bash/macOS: <code>for map in maps/*.json; do python -m treasure_explorer --map "$map" --agent agent.py; done</code></span></li>
         <li><span class="en">Tests: <code>python -m unittest discover -s tests -v</code></span><span class="ko">테스트: <code>python -m unittest discover -s tests -v</code></span></li>
+        <li><span class="en">From Week 1 Thursday: <code>python learning_checks.py</code> checks your TODOs one by one; <code>python grade.py</code> (exercises) or <code>python grade.py --practice</code> (tests) scores the public maps.</span><span class="ko">1주차 목요일부터: <code>python learning_checks.py</code>는 TODO를 하나씩 확인하고, <code>python grade.py</code>(연습) 또는 <code>python grade.py --practice</code>(테스트)는 공개 맵 점수를 계산합니다.</span></li>
         <li><span class="en">Each command starts a fresh run; the fixed <code>agent.py</code> loads your unchanged <code>student_policy.py</code> for every map.</span><span class="ko">각 명령은 새 실행을 시작하며, 고정 <code>agent.py</code>가 수정 없는 동일한 <code>student_policy.py</code>를 모든 맵에 불러옵니다.</span></li>
       </ul>
     </div>
@@ -42,24 +43,26 @@
 
 <section class="contract">
   <p class="sectionCode"><span class="en">01 / OBJECTIVE AND EXECUTION</span><span class="ko">01 / 목표 및 실행</span></p>
-  <h2><span class="en">Observe. Plan. Act. Repeat.</span><span class="ko">관측. 계획. 행동. 반복.</span></h2>
+  <h2><span class="en">Distances first, then a plan.</span><span class="ko">거리를 먼저, 그다음 계획.</span></h2>
   <div class="contractGrid">
     <div>
       <h3><span class="en">Core objective</span><span class="ko">핵심 목표</span></h3>
       <ul>
         <li><span class="en">Reach the exit within the energy budget.</span><span class="ko">에너지 예산 내에 출구에 도달하세요.</span></li>
         <li><span class="en">Collect valuable treasure without sacrificing a safe exit.</span><span class="ko">안전한 출구 경로를 희생하지 않고 가치 있는 보물을 수집하세요.</span></li>
-        <li><span class="en">Reduce wasted movement and invalid actions.</span><span class="ko">불필요한 이동과 무효 행동을 줄이세요.</span></li>
+        <li><span class="en">On a key map, collect the key <code>K</code> before the exit: until then the exit stays locked.</span><span class="ko">열쇠가 있는 맵에서는 출구 전에 열쇠 <code>K</code>를 주우세요. 그전까지 출구는 잠겨 있습니다.</span></li>
+        <li><span class="en">Spend no energy you do not need: energy left at the exit is part of the score.</span><span class="ko">필요 없는 에너지를 쓰지 마세요. 출구에서 남은 에너지가 점수에 더해집니다.</span></li>
         <li><span class="en">Generalize across every map in the stage.</span><span class="ko">단계의 모든 맵에 범용적으로 대응하세요.</span></li>
       </ul>
     </div>
     <div>
-      <h3><span class="en">Turn structure</span><span class="ko">턴 구조</span></h3>
+      <h3><span class="en">How a run works</span><span class="ko">실행 방식</span></h3>
       <ul>
-        <li><span class="en">The engine calls <code>choose_action(observation)</code> once per turn.</span><span class="ko">엔진은 매 턴 <code>choose_action(observation)</code>을 한 번 호출합니다.</span></li>
-        <li><span class="en">The agent returns exactly one supported action.</span><span class="ko">에이전트는 지원되는 행동 하나만 반환합니다.</span></li>
-        <li><span class="en">The engine updates position, energy, collection state, and visible information.</span><span class="ko">엔진은 위치, 에너지, 수집 상태, 가시 정보를 업데이트합니다.</span></li>
-        <li><span class="en">The next decision uses the updated observation.</span><span class="ko">다음 결정은 업데이트된 관측을 사용합니다.</span></li>
+        <li><span class="en">The engine calls <code>choose_action(observation)</code> in the fixed <code>agent.py</code> once per turn and applies the one action it returns.</span><span class="ko">엔진은 매 턴 고정 <code>agent.py</code>의 <code>choose_action(observation)</code>을 한 번 호출하고, 돌려받은 행동 하나를 적용합니다.</span></li>
+        <li><span class="en">From Week 1 Thursday, <code>agent.py</code> calls YOUR <code>choose_targets(grid, start, exit_cell, energy, treasures)</code> once, on the first turn, and gets the targets to collect in visit order.</span><span class="ko">1주차 목요일부터 <code>agent.py</code>는 첫 턴에 여러분의 <code>choose_targets(grid, start, exit_cell, energy, treasures)</code>를 한 번 호출해 주울 대상을 방문 순서대로 받습니다.</span></li>
+        <li><span class="en">Then it walks: every turn it steps to the neighbour closest to the next target according to YOUR distances (<code>bfs_distances</code> or <code>dijkstra_distances</code>), collects the target, and finally walks to the exit.</span><span class="ko">그다음 매 턴 여러분의 거리(<code>bfs_distances</code> 또는 <code>dijkstra_distances</code>)로 다음 대상에 가장 가까운 이웃 칸으로 움직이고, 대상을 수집하고, 마지막에 출구로 갑니다.</span></li>
+        <li><span class="en">It checks your plan first: treasure cells (and the key) only, each at most once, and the key on a key map. A wrong plan or wrong distances stop the run with an error message.</span><span class="ko">계획은 먼저 확인합니다: 보물 칸(과 열쇠)만, 각각 한 번 이하, 열쇠가 있는 맵은 열쇠 포함. 잘못된 계획이나 거리는 오류 메시지와 함께 실행을 멈춥니다.</span></li>
+        <li><span class="en">Week 1 Tuesday keeps its own format: your code picks every action from the observation (see its README).</span><span class="ko">1주차 화요일은 자체 형식을 유지합니다: 여러분의 코드가 관측을 보고 매 행동을 고릅니다(README 참고).</span></li>
       </ul>
     </div>
   </div>
@@ -73,22 +76,23 @@
       <h3><span class="en">Supported actions</span><span class="ko">지원 행동</span></h3>
       <ul>
         <li><code>MOVE_UP</code>, <code>MOVE_DOWN</code>, <code>MOVE_LEFT</code>, <code>MOVE_RIGHT</code></li>
-        <li><span class="en"><code>COLLECT</code> while standing on an uncollected treasure</span><span class="ko">미수집 보물 위에서 <code>COLLECT</code></span></li>
-        <li><span class="en">Cost is charged when entering a cell: normal, start, exit, and treasure 1; mud 4; water 7.</span><span class="ko">셀에 진입할 때 비용이 부과됩니다: 일반·시작·출구·보물 1, 진흙 4, 물 7.</span></li>
-        <li><span class="en"><code>COLLECT</code> costs 1. Week 1 maps contain only unit-cost terrain.</span><span class="ko"><code>COLLECT</code>는 에너지 1을 소비합니다. 1주차 맵은 단위 비용 지형만 포함합니다.</span></li>
+        <li><span class="en"><code>COLLECT</code> while standing on an uncollected treasure or on the key <code>K</code></span><span class="ko">미수집 보물이나 열쇠 <code>K</code> 위에서 <code>COLLECT</code></span></li>
+        <li><span class="en">Cost is charged when entering a cell: normal, start, exit, treasure and key 1; mud 4; water 7.</span><span class="ko">칸에 들어갈 때 비용이 듭니다: 일반·시작·출구·보물·열쇠 1, 진흙 4, 물 7.</span></li>
+        <li><span class="en"><code>COLLECT</code> costs 1. Mud and water appear in Week 2 Thursday and Week 3 Tuesday; on the other maps every step costs 1.</span><span class="ko"><code>COLLECT</code>는 1입니다. 진흙·물은 2주차 목요일과 3주차 화요일에 나오며, 다른 맵은 한 걸음에 1입니다.</span></li>
         <li><span class="en">Reaching 0 energy on any cell other than the exit ends the run immediately with score 0.</span><span class="ko">출구가 아닌 칸에서 에너지가 0이 되면 실행이 즉시 끝나고 0점입니다.</span></li>
-        <li><span class="en">The run also ends immediately with score 0 when no move is possible any more: every neighbour is a wall or costs more than the energy left. Energy never increases, so such a run could never reach the exit.</span><span class="ko">더 이상 움직일 수 있는 칸이 없을 때(모든 이웃이 벽이거나 남은 에너지보다 비쌈)도 실행이 즉시 끝나고 0점입니다. 에너지는 늘지 않으므로 이런 실행은 출구에 도달할 수 없습니다.</span></li>
+        <li><span class="en">The run also ends immediately with score 0 when no move is possible any more: every neighbour is a wall, the locked exit, or costs more than the energy left. Energy never increases, so such a run could never reach the exit.</span><span class="ko">더 이상 움직일 수 있는 칸이 없을 때(모든 이웃이 벽이거나 잠긴 출구이거나 남은 에너지보다 비쌈)도 실행이 즉시 끝나고 0점입니다. 에너지는 늘지 않으므로 이런 실행은 출구에 도달할 수 없습니다.</span></li>
         <li><span class="en">Remaining energy is part of the score, so a treasure is worth its value minus the extra energy it costs.</span><span class="ko">남은 에너지가 점수에 포함되므로, 보물의 순이익은 가치에서 그 보물 때문에 추가로 쓴 에너지를 뺀 값입니다.</span></li>
       </ul>
     </div>
     <div>
       <h3><span class="en">Invalid actions</span><span class="ko">무효 행동</span></h3>
       <ul>
-        <li><span class="en">Moving outside the map, into a wall, or without enough energy</span><span class="ko">맵 밖으로 이동, 벽으로 이동, 에너지 부족 이동</span></li>
-        <li><span class="en">Collecting without an available treasure at the current position</span><span class="ko">현재 위치에 수집 가능한 보물이 없을 때 COLLECT</span></li>
-        <li><span class="en">Returning an unsupported value or raising an exception</span><span class="ko">지원되지 않는 값 반환 또는 예외 발생</span></li>
+        <li><span class="en">Moving outside the map, into a wall, into the exit while it is still locked, or without enough energy</span><span class="ko">맵 밖, 벽, 아직 잠긴 출구로 이동하거나 에너지가 부족한 이동</span></li>
+        <li><span class="en">Collecting where there is neither an uncollected treasure nor the key</span><span class="ko">현재 위치에 미수집 보물도 열쇠도 없을 때 COLLECT</span></li>
+        <li><span class="en">Returning an unsupported value</span><span class="ko">지원되지 않는 값 반환</span></li>
         <li><span class="en">An invalid action leaves position and energy unchanged, consumes one turn, and subtracts 5 points after a successful exit.</span><span class="ko">무효 행동은 위치와 에너지를 변경하지 않고 한 턴을 소비하며, 성공적인 출구 이후 5점을 차감합니다.</span></li>
         <li><span class="en">Repeated invalid actions can also reach the map's maximum-turn limit.</span><span class="ko">반복된 무효 행동은 맵의 최대 턴 제한에 도달할 수 있습니다.</span></li>
+        <li><span class="en">An uncaught exception is not an invalid action: it stops the run, and that map scores 0.</span><span class="ko">처리되지 않은 예외는 무효 행동이 아니라 실행을 멈추며, 그 맵은 0점입니다.</span></li>
       </ul>
     </div>
   </div>
@@ -99,9 +103,10 @@
   <h2><span class="en">Optimize the complete expedition.</span><span class="ko">전체 탐험을 최적화하세요.</span></h2>
   <div class="contractGrid">
     <div>
-      <h3><span class="en">Treasure and exit</span><span class="ko">보물과 출구</span></h3>
+      <h3><span class="en">Treasure, key and exit</span><span class="ko">보물, 열쇠, 출구</span></h3>
       <ul>
-        <li><span class="en">Arriving at a treasure does not collect it; use <code>COLLECT</code>.</span><span class="ko">보물에 도착한다고 자동으로 수집되지 않습니다. <code>COLLECT</code>를 사용하세요.</span></li>
+        <li><span class="en">Arriving at a treasure does not collect it; <code>COLLECT</code> does. From Week 1 Thursday, <code>agent.py</code> collects every target of your plan.</span><span class="ko">보물에 도착한다고 자동으로 수집되지 않습니다. <code>COLLECT</code>가 필요합니다. 1주차 목요일부터는 <code>agent.py</code>가 계획의 대상마다 수집합니다.</span></li>
+        <li><span class="en">The key <code>K</code> (Week 2 Tuesday, Week 3 Tuesday) is worth 0 and costs 1 to collect. It unlocks the exit; before that the exit cannot be entered.</span><span class="ko">열쇠 <code>K</code>(2주차 화, 3주차 화)는 가치가 0이고 수집에 1이 듭니다. 열쇠를 주워야 출구가 열리고, 그전에는 출구에 들어갈 수 없습니다.</span></li>
         <li><span class="en">Entering the exit immediately ends the run.</span><span class="ko">출구에 진입하면 즉시 실행이 종료됩니다.</span></li>
         <li><span class="en">The exit is a final destination, not an intermediate waypoint.</span><span class="ko">출구는 최종 목적지이며 중간 경유지로 사용할 수 없습니다.</span></li>
         <li><span class="en">Preserve the energy required for a safe exit.</span><span class="ko">안전한 출구에 필요한 에너지를 항상 확보하세요.</span></li>
@@ -109,7 +114,7 @@
     </div>
     <div>
       <h3><span class="en">Base score</span><span class="ko">기본 점수</span></h3>
-      <p><span class="en">The formula here is the raw game score shown by the viewer. In Weeks 1/2, grade.py converts it to assignment marks using escape 50% and B/T improvement 50%. A failed exit, error or timeout earns zero. At B=T, the improvement half uses score/T. Week 3 keeps its LOW/HIGH mean game score.</span><span class="ko">이 공식은 viewer의 원래 게임 score입니다. 1·2주차 grade.py는 탈출 50%와 B·T 개선 50%로 과제 성적을 계산합니다. 탈출 실패·오류·시간 초과는 0점이며 B=T일 때 개선도는 score/T입니다. 3주차는 기존 LOW/HIGH 평균 게임 score를 유지합니다.</span></p>
+      <p><span class="en">The formula here is the raw game score shown by the viewer. <code>grade.py</code> turns it into marks: every map gives 50% for reaching the exit and 50% for the improvement from B to T (see 06). No exit, an error or more than 10 seconds scores 0.</span><span class="ko">이 공식은 viewer에 나오는 원래 게임 점수입니다. <code>grade.py</code>는 이를 성적으로 바꿉니다: 맵마다 출구 도달 50%, B에서 T까지의 개선 50%입니다(06 참고). 출구 미도달·오류·10초 초과는 0점입니다.</span></p>
       <ul>
         <li><span class="en"><code>Exit Bonus + Treasure Value + Remaining Energy - Invalid Penalties</code></span><span class="ko"><code>출구 보너스 + 보물 가치 + 남은 에너지 - 무효 행동 패널티</code></span></li>
         <li><span class="en">Default exit bonus: 50.</span><span class="ko">기본 출구 보너스: 50.</span></li>
@@ -125,11 +130,10 @@
   <h2><span class="en">Use only what the agent is allowed to know.</span><span class="ko">에이전트가 알 수 있도록 허용된 정보만 사용하세요.</span></h2>
   <div class="contractGrid">
     <div>
-      <h3><span class="en">Observation</span><span class="ko">관측 (Observation)</span></h3>
+      <h3><span class="en">What your code gets</span><span class="ko">코드가 받는 정보</span></h3>
       <ul>
-        <li><span class="en">Observation may include turn, position, energy, visible grid, exit, and treasure information.</span><span class="ko">관측에는 턴, 위치, 에너지, 가시 격자, 출구, 보물 정보가 포함될 수 있습니다.</span></li>
-        <li><span class="en"><code>?</code> means unobserved, not safe or normal terrain.</span><span class="ko"><code>?</code>는 미관측을 의미하며 안전하거나 일반적인 지형을 의미하지 않습니다.</span></li>
-        <li><span class="en">Week 2 Thursday hides values only. Week 3 also hides terrain, treasure positions and the exit. Both use the same per-map LOW/HIGH value model.</span><span class="ko">2주차 목요일은 가치만 가리고, 3주차는 지형·보물 위치·출구도 가립니다. 두 회차는 같은 맵별 LOW/HIGH 가치 규칙을 사용합니다.</span></li>
+        <li><span class="en">Every map is fully visible: terrain, treasure positions and values, the key and the exit.</span><span class="ko">모든 맵은 전부 보입니다: 지형, 보물 위치와 가치, 열쇠, 출구.</span></li>
+        <li><span class="en">From Week 1 Thursday your functions get <code>grid</code>, <code>start</code>, <code>exit_cell</code>, <code>energy</code> and <code>treasures</code> (<code>{cell: value}</code>). The key is the <code>K</code> in <code>grid</code>.</span><span class="ko">1주차 목요일부터 함수는 <code>grid</code>, <code>start</code>, <code>exit_cell</code>, <code>energy</code>, <code>treasures</code>(<code>{칸: 가치}</code>)를 받습니다. 열쇠는 <code>grid</code>의 <code>K</code>입니다.</span></li>
         <li><span class="en">Information may be remembered within the same run.</span><span class="ko">정보는 같은 실행 내에서 기억할 수 있습니다.</span></li>
         <li><span class="en">Separate runs must start with independent state.</span><span class="ko">별도의 실행은 독립적인 상태에서 시작해야 합니다.</span></li>
       </ul>
@@ -156,17 +160,17 @@
         <li><span class="en">Run with <code>--agent agent.py</code>, but edit and submit only <code>student_policy.py</code> from the released stage package.</span><span class="ko">실행은 <code>--agent agent.py</code>로 하지만, 수정·제출하는 파일은 배포된 단계 패키지의 <code>student_policy.py</code> 하나입니다.</span></li>
         <li><span class="en">The evaluator loads that same file independently for every map in the stage.</span><span class="ko">평가기는 단계의 모든 맵에 대해 동일한 파일을 독립적으로 로드합니다.</span></li>
         <li><span class="en">Do not branch on filenames, titles, seeds, dimensions used as fingerprints, or memorized layouts.</span><span class="ko">파일 이름, 제목, 시드, 지문으로 사용되는 크기, 또는 기억된 레이아웃으로 분기하지 마세요.</span></li>
-        <li><span class="en">Using observed grid dimensions and contents as ordinary algorithm inputs is allowed.</span><span class="ko">관측된 격자 크기와 내용을 일반적인 알고리즘 입력으로 사용하는 것은 허용됩니다.</span></li>
+        <li><span class="en">Using the grid's dimensions and contents as ordinary algorithm inputs is allowed.</span><span class="ko">격자의 크기와 내용을 일반적인 알고리즘 입력으로 사용하는 것은 허용됩니다.</span></li>
       </ul>
     </div>
     <div>
       <h3><span class="en">Submission boundary</span><span class="ko">제출 범위</span></h3>
       <ul>
-        <li><span class="en">Submit <code>student_policy.py</code> plus the design note each stage README asks for. Never modify <code>agent.py</code> or <code>policy_helpers.py</code>.</span><span class="ko"><code>student_policy.py</code>와 각 단계 README가 요구하는 설계 노트를 제출하세요. <code>agent.py</code>와 <code>policy_helpers.py</code>는 수정하지 마세요.</span></li>
+        <li><span class="en">Submit only <code>student_policy.py</code>. Never modify <code>agent.py</code> or <code>policy_helpers.py</code>.</span><span class="ko"><code>student_policy.py</code> 하나만 제출하세요. <code>agent.py</code>와 <code>policy_helpers.py</code>는 수정하지 마세요.</span></li>
         <li><span class="en">Week 1 Tuesday requires your own bfs_path() in use with USE_MY_BFS=True for full game-score credit. Reference BFS earns only the 50-point exit bonus on escape, or 0 on failure. grade.py applies this rule before credit conversion. Each successful reference-BFS run earns the escape half only; exiting all four public maps earns 50/100 assignment marks.</span><span class="ko">1주차 화요일은 직접 구현한 bfs_path()를 USE_MY_BFS=True로 사용해야 전체 게임 점수를 인정합니다. 참고 BFS는 탈출 시 게임 점수 50점, 실패 시 0점만 인정합니다. grade.py가 환산 전에 적용합니다. 참고 BFS로 탈출하면 맵의 탈출 점수 50%를 받고, 네 공개 맵을 모두 탈출하면 과제 성적 50/100점입니다.</span></li>
-        <li><span class="en">Do not modify the engine, maps, runner, tests, or configuration; evaluation uses clean official copies.</span><span class="ko">엔진, 맵, 러너, 테스트, 설정은 수정하지 마세요. 평가는 공식 원본을 사용합니다.</span></li>
+        <li><span class="en">Do not modify the engine, maps, runner, tests, grader or <code>grading.json</code>; evaluation uses clean official copies.</span><span class="ko">엔진, 맵, 러너, 테스트, 채점기, <code>grading.json</code>은 수정하지 마세요. 평가는 공식 원본을 사용합니다.</span></li>
         <li><span class="en">Use Python 3.11+ and the standard library only unless a stage explicitly states otherwise.</span><span class="ko">단계에서 명시하지 않는 한 Python 3.11+ 표준 라이브러리만 사용하세요.</span></li>
-        <li><span class="en">Each stage README lists its deliverables, input limits (treasures, grid size, energy), time limit and rubric.</span><span class="ko">단계별 제출물, 입력 상한(보물 수·격자 크기·에너지), 시간 제한, 채점표는 각 단계 README에 있습니다.</span></li>
+        <li><span class="en">Each stage README lists its TODOs, its maps (basic or challenge) and their limits.</span><span class="ko">회차별 TODO, 맵(기본·도전)과 그 상한은 각 회차 README에 있습니다.</span></li>
       </ul>
     </div>
   </div>
@@ -179,7 +183,7 @@
     <div>
       <h3><span class="en">Runtime contract</span><span class="ko">런타임 계약</span></h3>
       <ul>
-        <li><span class="en">Every run has at most 500 turns. Whole-map limits are 10 seconds in Weeks 1–2 and 20 seconds in Week 3, including policy loading.</span><span class="ko">최대 500턴이며 정책 로딩을 포함한 맵 전체 제한은 1·2주차 10초, 3주차 20초입니다.</span></li>
+        <li><span class="en">Every run has at most 500 turns. Each map must finish within 10 seconds, policy loading included; a map over 10 seconds scores 0.</span><span class="ko">실행은 최대 500턴입니다. 맵마다 정책 로딩을 포함해 10초 안에 끝나야 하며, 10초를 넘긴 맵은 0점입니다.</span></li>
         <li><span class="en">Infinite loops or an uncaught exception can terminate or invalidate a run.</span><span class="ko">무한 루프나 처리되지 않은 예외는 실행을 종료하거나 무효화할 수 있습니다.</span></li>
         <li><span class="en">Any later per-action, total-runtime, or memory limit must be stated on that stage page before release.</span><span class="ko">이후 행동별·전체 런타임·메모리 제한은 해당 단계 페이지에서 배포 전에 명시됩니다.</span></li>
         <li><span class="en">Viewer delay is display time and is not part of algorithm performance.</span><span class="ko">뷰어 지연은 표시 시간이며 알고리즘 성능에 포함되지 않습니다.</span></li>
@@ -189,9 +193,10 @@
       <h3><span class="en">Evaluation signals</span><span class="ko">평가 신호</span></h3>
       <ul>
         <li><span class="en">Per-map score: <code>50 + collected treasure + remaining energy - 5 × invalid actions</code>, only after reaching the exit</span><span class="ko">맵별 점수: <code>50 + 수집한 보물 + 남은 에너지 - 5 × 무효 행동</code> (출구 도달 후에만)</span></li>
-        <li><span class="en">Week 1 uses public maps. Week 2 uses instructor-held hidden maps. Each unit earns 50% for successful escape and 50% for improvement from B to T. Basic/challenge group weights remain 60/40. Week 2 Thursday pairs use mean game score for improvement and the fraction of successful exits for escape credit. Weeks 2/3 public maps are practice only.</span><span class="ko">1주차는 공개 맵, 2주차는 교수자 비공개 맵으로 평가합니다. 각 단위는 탈출에 50%, B·T 기준 개선에 50%를 부여하고 기본/도전 그룹 비중은 60/40입니다. 2주차 목요일 쌍은 평균 게임 score로 개선도를, 두 실행의 탈출 성공 비율로 탈출 점수를 계산합니다. 2·3주차 공개 맵은 연습용입니다.</span></li>
-        <li><span class="en">Apart from the Week 1 Tuesday BFS eligibility rule, the policy grader adds no implementation, code-quality, note or experiment marks. The final presentation is a separate 15% course component. Exit rate and invalid actions are diagnostics already reflected in game score.</span><span class="ko">1주차 화요일 BFS 인정 규칙 외에 구현·코드 품질·노트·실험의 별도 배점은 없습니다. 최종 발표는 교과목 성적의 별도 15%입니다. 탈출률·무효 행동은 이미 게임 score에 반영됩니다.</span></li>
-        <li><span class="en">Week 3 also uses instructor-held hidden maps. Its final metric is 0.5 times mean LOW score plus 0.5 times mean HIGH score, in game-score units, and contributes 25% of the course grade. Public practice is excluded.</span><span class="ko">3주차도 교수자가 별도 보관한 hidden map으로 평가합니다. 최종 평가값은 LOW 평균 score와 HIGH 평균 score를 50:50 반영한 게임 score 단위이며 전체 성적의 25%입니다. 공개 연습은 제외합니다.</span></li>
+        <li><span class="en">Exercises (Week 1 Tuesday, Week 1 Thursday, Week 2 Thursday) are graded on their public maps: <code>python grade.py</code>. Tests (Week 2 Tuesday, Week 3 Tuesday) are graded on instructor-held hidden maps that follow the same rules as the public ones; their public maps are practice: <code>python grade.py --practice</code>.</span><span class="ko">연습(1주차 화, 1주차 목, 2주차 목)은 공개 맵으로 평가합니다: <code>python grade.py</code>. 테스트(2주차 화, 3주차 화)는 공개 맵과 같은 규칙으로 만든 교수자의 비공개 맵으로 평가하며, 공개 맵은 연습용입니다: <code>python grade.py --practice</code>.</span></li>
+        <li><span class="en">Each map: 50% for reaching the exit + 50% for the improvement from B to T. B = straight to the exit (on a key map: only the key, then the exit); T = the best possible score. Improvement = (S − B) / (T − B), kept between 0 and 1; on a map with T = B it is S / T.</span><span class="ko">각 맵: 출구 도달 50% + B에서 T까지의 개선 50%. B = 곧장 출구로 갔을 때의 점수(열쇠가 있는 맵은 열쇠만 줍고 출구), T = 가능한 최고 점수. 개선도 = (S − B) / (T − B)이며 0과 1 사이로 자릅니다. T = B인 맵은 S / T입니다.</span></li>
+        <li><span class="en">Session grade = 60 × (mean of basic maps) + 40 × (mean of challenge maps).</span><span class="ko">회차 성적 = 60 × (기본 맵 평균) + 40 × (도전 맵 평균).</span></li>
+        <li><span class="en">Apart from the Week 1 Tuesday BFS rule, there are no marks for implementation, code style, notes or experiments. Course weights: Week 1 Tue, Week 1 Thu, Week 2 Tue and Week 2 Thu 15% each, Week 3 Tue 25%, and the final presentation (Week 3 Thu) 15%.</span><span class="ko">1주차 화요일 BFS 인정 규칙 외에 구현·코드 스타일·노트·실험의 별도 배점은 없습니다. 교과목 비중: 1주차 화·1주차 목·2주차 화·2주차 목 각 15%, 3주차 화 25%, 최종 발표(3주차 목) 15%.</span></li>
       </ul>
     </div>
   </div>
@@ -205,6 +210,7 @@
     <li><span class="en">Do not publish a complete solution before grading ends.</span><span class="ko">채점이 끝나기 전에 완전한 솔루션을 게시하지 마세요.</span></li>
     <li><span class="en">Do not extract, share, or identify hidden maps and seeds.</span><span class="ko">숨겨진 맵과 시드를 추출, 공유, 식별하지 마세요.</span></li>
     <li><span class="en">Use this session's introduction and distributed specification/API. No Week 6/7 materials, AI or web searches. Do not copy from earlier code of this project (your own team's included) kept open beside you; recalling the ideas and writing the code again is allowed.</span><span class="ko">당회차 소개 자료와 배포 명세·API만 참고합니다. 기존 Week 6·7 자료·AI·웹 검색은 금지합니다. 이번 프로젝트의 이전 회차 코드(우리 팀 코드 포함)를 옆에 띄워 놓고 옮겨 쓰는 것은 금지하며, 배운 개념을 떠올려 새로 작성하는 것은 괜찮습니다.</span></li>
+    <li><span class="en">AI code completion (Copilot, IntelliCode, Cursor, ...) counts as AI. Open the extracted session folder itself in VS Code: its .vscode/settings.json switches completion off. Do not change it.</span><span class="ko">AI 자동완성(Copilot, IntelliCode, Cursor 등)도 AI입니다. 압축을 푼 회차 폴더 자체를 VS Code로 열면 .vscode/settings.json이 자동완성을 끕니다. 이 설정을 바꾸지 마세요.</span></li>
     <li><span class="en">You must be able to explain every important design decision.</span><span class="ko">모든 중요한 설계 결정을 설명할 수 있어야 합니다.</span></li>
   </ul>
 </section>

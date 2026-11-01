@@ -50,17 +50,17 @@ window.SITE_CONTENT = {
     {
       "number": "RULE 01",
       "title": "Everything is visible",
-      "text": "Every map shows terrain, treasures, values and the exit. Mud and water appear from W2 Thursday. At most 8 treasures per map; test challenge maps have 11-12."
+      "text": "Every map shows terrain, treasures, values and the exit. W2 Tuesday adds a key K that opens the exit, W2 Thursday mud and water, W3 Tuesday both. At most 8 treasures per map; key maps have at most 7 plus the key."
     },
     {
       "number": "RULE 02",
       "title": "Return first",
-      "text": "Treasure counts only after the bot reaches the exit. The exit is always a dead end, so shortest routes to treasure never cross it."
+      "text": "Treasure counts only after the bot reaches the exit, and on a key map the exit opens only after the key is collected. The exit is always a dead end, so shortest routes to treasure never cross it."
     },
     {
       "number": "RULE 03",
       "title": "Energy is score",
-      "text": "Normal 1 · Mud 4 · Water 7 · Collect 1. Energy left at the exit is added to the score."
+      "text": "Normal 1 · Mud 4 · Water 7 · Collect 1 (treasure or key). Energy left at the exit is added to the score."
     }
   ],
   "schedule": [
@@ -104,22 +104,22 @@ window.SITE_CONTENT = {
     [
       "W1 THU",
       "Public score only · Basic 60 + challenge 40",
-      "BFS exercise. Six public maps, up to 8 treasures: choose the subset and the order. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "BFS exercise. Seven public maps, up to 8 treasures: design how to choose the subset and the order (a starter that loses points is given). Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
       "W2 TUE",
       "Hidden test · Basic 60 + challenge 40",
-      "BFS test. Challenge maps have 11-12 treasures, so the plan search needs pruning. Six public maps are practice; only the instructor's hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "BFS test with a key K that opens the exit; at most 7 treasures plus the key. Six public maps are practice; only the instructor's hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
       "W2 THU",
       "Public score only · Basic 60 + challenge 40",
-      "Dijkstra exercise. Six public maps with mud (4) and water (7); the plan search is provided. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra exercise. Six public maps with mud (4) and water (7): write Dijkstra, then plan_cost and choose_targets again. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
       "W3 TUE",
       "Hidden test · Basic 60 + challenge 40",
-      "Dijkstra test, 25% of the overall course grade. Mud and water with 11-12 treasures on challenge maps. Six public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra test, 25% of the overall course grade. Mud, water and a key K; at most 7 treasures plus the key. Six public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ]
   ],
   "submissionRules": [
@@ -133,6 +133,7 @@ window.SITE_CONTENT = {
     "Work in a team of two. Do not share code with other teams.",
     "Use the current introduction and distributed API/specification. No Week 6/7 materials, AI or web searches.",
     "Do not copy from earlier code of THIS project (your own team's included) kept open beside you. Recalling the ideas and writing the code again is allowed.",
+    "AI code completion (Copilot, IntelliCode, Cursor, ...) counts as AI. Open the extracted session folder itself in VS Code: its .vscode/settings.json switches completion off. Do not change it.",
     "Do not publish answers before grading ends, or identify maps/seeds through hardcoding or side channels."
   ],
   "stages": [
@@ -166,19 +167,19 @@ window.SITE_CONTENT = {
       "title": "SEVERAL TREASURES ★★",
       "unlocked": false,
       "tagline": "New: several treasures. Choose which ones, in which order.",
-      "focus": "BFS · Every subset and order · Public score",
+      "focus": "BFS · Design the plan yourself · Public score",
       "repositoryUrl": null,
       "objectives": [
-        "bfs_distances: one BFS gives the distance to every cell.",
+        "bfs_distances: finish the BFS frame; the neighbours of each cell are yours. One BFS gives the distance to every cell.",
         "plan_cost: the energy one plan needs.",
-        "choose_targets: try every order of every group of treasures (up to 8) and keep the best."
+        "choose_targets: a starter (nearest treasure first) is given and loses points. Find out why, then return the plan with the highest score."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
         "label": "PUBLIC SCORE",
-        "title": "Six public maps: basic 60 + challenge 40.",
+        "title": "Seven public maps: basic 60 + challenge 40.",
         "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
       }
     },
@@ -186,15 +187,15 @@ window.SITE_CONTENT = {
       "number": "03",
       "week": "WEEK 2",
       "day": "TUESDAY",
-      "title": "BFS TEST ★★★",
+      "title": "BFS TEST · THE KEY ★★★",
       "unlocked": false,
-      "tagline": "New: challenge maps have 11-12 treasures. Trying every order is too slow, so prune.",
-      "focus": "BFS · Search with pruning · Hidden maps",
+      "tagline": "New: a key K. The exit stays locked until the key is collected.",
+      "focus": "BFS · Plans with the key · Hidden maps",
       "repositoryUrl": null,
       "objectives": [
-        "Write bfs_distances and choose_targets from the outline; each TODO lists the steps.",
-        "Stop extending a plan as soon as it can no longer reach the exit. A map over 10 seconds scores 0.",
-        "Hidden maps: unit cost, basic up to 8 treasures, challenge 11-12, dead-end exit."
+        "bfs_distances and plan_cost keep the Week 1 Thursday frames. find_key is provided.",
+        "plan_score is the one new function: a plan without the key, or one that needs more energy than you have, is not allowed.",
+        "choose_targets has only its steps. At most 7 treasures plus the key, so trying every plan is fast enough."
       ],
       "deliverables": [
         "student_policy.py"
@@ -202,7 +203,7 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "HIDDEN SCORE",
         "title": "Only the instructor's hidden maps count.",
-        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40. Public grade.py --practice is ungraded practice."
+        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40. A plan without the key scores 0 on that map. Public grade.py --practice is ungraded practice."
       }
     },
     {
@@ -212,11 +213,11 @@ window.SITE_CONTENT = {
       "title": "WEIGHTED ROUTES ★★★",
       "unlocked": false,
       "tagline": "Mud and water: the fewest steps is no longer the least energy.",
-      "focus": "Dijkstra · Priority queue · Plan search provided",
+      "focus": "Dijkstra · Priority queue · Public score",
       "repositoryUrl": null,
       "objectives": [
-        "Write dijkstra_distances with heapq; fill the marked blanks.",
-        "plan_cost and choose_targets are provided (every order, up to 8 treasures).",
+        "dijkstra_distances: the heap and the loop are given; the neighbour updates (TERRAIN_COST) are yours.",
+        "plan_cost and choose_targets: write them again as on Week 1 Thursday. No key this week.",
         "Compare: with BFS distances the plan underestimates the energy it needs."
       ],
       "deliverables": [
@@ -232,15 +233,15 @@ window.SITE_CONTENT = {
       "number": "05",
       "week": "WEEK 3",
       "day": "TUESDAY",
-      "title": "DIJKSTRA TEST ★★★★",
+      "title": "DIJKSTRA TEST · THE KEY ★★★★",
       "unlocked": false,
-      "tagline": "New: mud and water AND 11-12 treasures. Combine Dijkstra with the search with pruning.",
-      "focus": "Dijkstra · Search with pruning · Hidden maps",
+      "tagline": "New: the key of Week 2 Tuesday on the mud-and-water maps of Week 2 Thursday.",
+      "focus": "Dijkstra · Plans with the key · Hidden maps",
       "repositoryUrl": null,
       "objectives": [
-        "Write dijkstra_distances and choose_targets from the outline; each TODO lists the steps.",
-        "Practise on six public maps with grade.py --practice.",
-        "Hidden maps: mud 4, water 7, basic up to 8 treasures, challenge 11-12, dead-end exit."
+        "dijkstra_distances and plan_cost keep the Week 2 Thursday frames. find_key is provided.",
+        "plan_score is the one new function, as on Week 2 Tuesday; choose_targets has only its steps.",
+        "At most 7 treasures plus the key. The cheapest way to the key can be a long walk around mud and water."
       ],
       "deliverables": [
         "student_policy.py"
@@ -248,7 +249,7 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "HIDDEN SCORE",
         "title": "Only the instructor's hidden maps count.",
-        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40. 25% of the overall course grade; the Thursday presentation is a separate 15%."
+        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40. A plan without the key scores 0 on that map. 25% of the overall course grade; the Thursday presentation is a separate 15%."
       }
     }
   ],
@@ -263,29 +264,29 @@ window.SITE_CONTENT = {
       "Each unit: escape 50% + B/T improvement 50%. Basic/challenge group weights remain 60/40."
     ],
     [
-      "Fill the marked blanks of bfs_distances, plan_cost and choose_targets.",
-      "Try every order of every group of treasures; skip plans that need more energy than you have.",
+      "Finish bfs_distances (up, down, left, right, walls, map borders), then plan_cost. With both done, the given starter already runs.",
+      "choose_targets: watch with --view why the starter (nearest treasure first) loses points, then design a better method. A plan must never need more energy than you have.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Official grade: grade.py. No hidden maps.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
-      "Write bfs_distances and choose_targets from the outline; each TODO lists the steps.",
-      "Challenge maps have 11-12 treasures: prune plans that can no longer reach the exit. Over 10 seconds = 0 for that map.",
+      "Write bfs_distances, plan_cost, plan_score and choose_targets (TODO 1-4); only plan_score is new.",
+      "Every plan must contain the key K: the exit opens only after it is collected. On challenge maps the best plan collects it in the middle.",
       "Public maps are practice: grade.py --practice. The instructor runs the hidden maps.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
-      "Write dijkstra_distances with heapq; fill the marked blanks in the skeleton.",
-      "plan_cost and choose_targets are provided.",
+      "Finish dijkstra_distances: the heap and the loop are given; the neighbour updates are yours.",
+      "Write plan_cost and choose_targets again, as on Week 1 Thursday: only the numbers in the table are energy now.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Official grade: grade.py. No hidden maps.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
-      "Write dijkstra_distances (Week 2 Thursday) and choose_targets with pruning (Week 2 Tuesday) from the outline.",
-      "Challenge maps: mud, water and 11-12 treasures. Over 10 seconds = 0 for that map.",
+      "Write dijkstra_distances, plan_cost, plan_score and choose_targets (TODO 1-4): Week 2 Thursday plus plan_score.",
+      "Mud, water AND the key: distances are energy, and every plan must contain the key K.",
       "Public maps are practice: grade.py --practice. The instructor runs the hidden maps.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
@@ -347,17 +348,17 @@ window.SITE_CONTENT_KO = {
     {
       "number": "규칙 01",
       "title": "모든 정보가 공개됩니다",
-      "text": "모든 맵에서 지형·보물·가치·출구가 보입니다. 진흙·물은 2주차 목요일부터 나옵니다. 보물은 맵당 최대 8개이고, 테스트 도전 맵만 11~12개입니다."
+      "text": "모든 맵에서 지형·보물·가치·출구가 보입니다. 2주차 화요일에 출구를 여는 열쇠 K, 2주차 목요일에 진흙·물이 나오고 3주차 화요일은 둘 다 나옵니다. 보물은 맵당 최대 8개이고, 열쇠가 있는 맵은 7개와 열쇠 하나입니다."
     },
     {
       "number": "규칙 02",
       "title": "귀환이 먼저입니다",
-      "text": "출구에 도달해야 보물 점수가 인정됩니다. 출구는 항상 막다른 칸이므로 보물로 가는 최단 경로가 출구를 지나지 않습니다."
+      "text": "출구에 도달해야 보물 점수가 인정되고, 열쇠가 있는 맵은 열쇠를 주워야 출구가 열립니다. 출구는 항상 막다른 칸이므로 보물로 가는 최단 경로가 출구를 지나지 않습니다."
     },
     {
       "number": "규칙 03",
       "title": "에너지가 점수입니다",
-      "text": "일반 1 · 진흙 4 · 물 7 · 수집 1. 출구에서 남은 에너지가 점수에 더해집니다."
+      "text": "일반 1 · 진흙 4 · 물 7 · 수집 1(보물·열쇠). 출구에서 남은 에너지가 점수에 더해집니다."
     }
   ],
   "schedule": [
@@ -401,22 +402,22 @@ window.SITE_CONTENT_KO = {
     [
       "W1 THU",
       "공개 score만 · 기본 60 + 도전 40",
-      "BFS 연습. 공개 맵 6개, 보물 최대 8개: 부분집합과 순서를 고릅니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "BFS 연습. 공개 맵 7개, 보물 최대 8개: 부분집합과 순서를 고르는 방법을 직접 설계합니다(점수를 잃는 시작 코드 제공). 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W2 TUE",
       "비공개 테스트 · 기본 60 + 도전 40",
-      "BFS 테스트. 도전 맵은 보물이 11~12개라 가지치기 탐색이 필요합니다. 공개 맵 6개는 연습용이며 교수자의 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "BFS 테스트. 출구를 여는 열쇠 K가 있고 보물은 7개 이하입니다. 공개 맵 6개는 연습용이며 교수자의 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W2 THU",
       "공개 score만 · 기본 60 + 도전 40",
-      "Dijkstra 연습. 진흙(4)·물(7)이 있는 공개 맵 6개. 계획 탐색은 제공합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 연습. 진흙(4)·물(7)이 있는 공개 맵 6개: Dijkstra를 작성하고 plan_cost와 choose_targets를 다시 작성합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W3 TUE",
       "비공개 테스트 · 기본 60 + 도전 40",
-      "Dijkstra 테스트, 전체 성적의 25%. 도전 맵은 진흙·물에 보물 11~12개입니다. 공개 맵 6개는 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 테스트, 전체 성적의 25%. 진흙·물과 열쇠 K가 있고 보물은 7개 이하입니다. 공개 맵 6개는 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ]
   ],
   "submissionRules": [
@@ -430,6 +431,7 @@ window.SITE_CONTENT_KO = {
     "2인 팀으로 진행하며 다른 팀과 코드를 공유하지 않습니다.",
     "당회차 소개 자료와 배포 명세·API만 참고합니다. 기존 Week 6·7 자료·AI·웹 검색은 금지합니다.",
     "이번 프로젝트의 이전 회차 코드(우리 팀 코드 포함)를 옆에 띄워 놓고 보면서 옮겨 쓰는 것은 금지합니다. 배운 개념을 떠올려 새로 작성하는 것은 괜찮습니다.",
+    "AI 자동완성(Copilot, IntelliCode, Cursor 등)도 AI입니다. 압축을 푼 회차 폴더 자체를 VS Code로 열면 .vscode/settings.json이 자동완성을 끕니다. 이 설정을 바꾸지 마세요.",
     "채점 전 답안 공개, 맵·좌표·시드 하드코딩과 사이드 채널 이용은 금지합니다."
   ],
   "stages": [
@@ -463,19 +465,19 @@ window.SITE_CONTENT_KO = {
       "title": "여러 보물 계획 ★★",
       "unlocked": false,
       "tagline": "새로 생긴 것: 보물 여러 개. 어떤 보물을 어떤 순서로 주울지 고르세요.",
-      "focus": "BFS · 모든 조합과 순서 · 공개 score",
+      "focus": "BFS · 계획 방법 직접 설계 · 공개 score",
       "repositoryUrl": null,
       "objectives": [
-        "bfs_distances: BFS 한 번으로 모든 칸까지의 거리를 구합니다.",
+        "bfs_distances: BFS 틀에서 칸마다 이웃 처리를 직접 작성합니다. BFS 한 번으로 모든 칸까지의 거리를 구합니다.",
         "plan_cost: 계획 하나에 드는 에너지를 계산합니다.",
-        "choose_targets: 보물(최대 8개)의 모든 조합과 순서를 시도해 가장 좋은 계획을 고릅니다."
+        "choose_targets: 점수를 잃는 시작 코드(가장 가까운 보물부터)가 주어집니다. 이유를 찾아 점수가 가장 높은 계획을 돌려줍니다."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
         "label": "공개 score 평가",
-        "title": "공개 맵 6개: 기본 60 + 도전 40.",
+        "title": "공개 맵 7개: 기본 60 + 도전 40.",
         "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
       }
     },
@@ -483,15 +485,15 @@ window.SITE_CONTENT_KO = {
       "number": "03",
       "week": "2주차",
       "day": "화요일",
-      "title": "BFS 테스트 ★★★",
+      "title": "BFS 테스트 · 열쇠 ★★★",
       "unlocked": false,
-      "tagline": "새로 생긴 것: 도전 맵 보물 11~12개. 모든 순서를 시도하면 너무 느려서 가지치기가 필요합니다.",
-      "focus": "BFS · 가지치기 탐색 · 비공개 맵",
+      "tagline": "새로 생긴 것: 열쇠 K. 열쇠를 주워야 출구가 열립니다.",
+      "focus": "BFS · 열쇠가 든 계획 · 비공개 맵",
       "repositoryUrl": null,
       "objectives": [
-        "함수 틀과 TODO의 단계 설명을 보고 bfs_distances와 choose_targets를 작성합니다.",
-        "출구에 갈 수 없게 된 계획은 더 늘리지 않습니다. 10초를 넘긴 맵은 0점입니다.",
-        "비공개 맵: 지형 비용 1, 기본 맵 보물 8개 이하, 도전 맵 11~12개, 막다른 출구."
+        "bfs_distances와 plan_cost는 1주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
+        "새 함수는 plan_score 하나: 열쇠가 빠졌거나 가진 에너지보다 많이 드는 계획은 안 됩니다.",
+        "choose_targets는 단계 설명만 주어집니다. 보물 7개 이하와 열쇠 하나라 모든 계획을 시도해도 충분히 빠릅니다."
       ],
       "deliverables": [
         "student_policy.py"
@@ -499,7 +501,7 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "비공개 score 평가",
         "title": "교수자의 비공개 맵만 성적에 반영합니다.",
-        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 공개 grade.py --practice는 성적과 무관한 연습입니다."
+        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 열쇠가 빠진 계획은 그 맵 0점입니다. 공개 grade.py --practice는 성적과 무관한 연습입니다."
       }
     },
     {
@@ -509,11 +511,11 @@ window.SITE_CONTENT_KO = {
       "title": "가중치 경로 ★★★",
       "unlocked": false,
       "tagline": "진흙과 물: 걸음 수가 가장 적은 길이 가장 싼 길은 아닙니다.",
-      "focus": "Dijkstra · 우선순위 큐 · 계획 탐색 제공",
+      "focus": "Dijkstra · 우선순위 큐 · 공개 score",
       "repositoryUrl": null,
       "objectives": [
-        "heapq로 dijkstra_distances를 작성합니다. 표시된 빈칸을 채웁니다.",
-        "plan_cost와 choose_targets(모든 순서, 보물 최대 8개)는 제공합니다.",
+        "dijkstra_distances: 힙과 반복문 틀이 주어지고, 이웃 칸 처리(TERRAIN_COST)를 직접 작성합니다.",
+        "plan_cost와 choose_targets는 1주차 목요일처럼 다시 작성합니다. 이번 회차에는 열쇠가 없습니다.",
         "비교: BFS 거리를 쓰면 계획이 필요한 에너지를 실제보다 적게 잡습니다."
       ],
       "deliverables": [
@@ -529,15 +531,15 @@ window.SITE_CONTENT_KO = {
       "number": "05",
       "week": "3주차",
       "day": "화요일",
-      "title": "Dijkstra 테스트 ★★★★",
+      "title": "Dijkstra 테스트 · 열쇠 ★★★★",
       "unlocked": false,
-      "tagline": "새로 생긴 것: 진흙·물에 보물 11~12개. Dijkstra와 가지치기 탐색을 함께 씁니다.",
-      "focus": "Dijkstra · 가지치기 탐색 · 비공개 맵",
+      "tagline": "새로 생긴 것: 2주차 목요일의 진흙·물 맵에 2주차 화요일의 열쇠.",
+      "focus": "Dijkstra · 열쇠가 든 계획 · 비공개 맵",
       "repositoryUrl": null,
       "objectives": [
-        "함수 틀과 TODO의 단계 설명을 보고 dijkstra_distances와 choose_targets를 작성합니다.",
-        "공개 맵 6개로 grade.py --practice 연습을 합니다.",
-        "비공개 맵: 진흙 4, 물 7, 기본 맵 보물 8개 이하, 도전 맵 11~12개, 막다른 출구."
+        "dijkstra_distances와 plan_cost는 2주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
+        "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 단계 설명만 주어집니다.",
+        "보물 7개 이하와 열쇠 하나. 열쇠까지 가장 싼 길이 진흙·물을 피해 멀리 돌아가는 길일 수 있습니다."
       ],
       "deliverables": [
         "student_policy.py"
@@ -545,7 +547,7 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "비공개 score 평가",
         "title": "교수자의 비공개 맵만 성적에 반영합니다.",
-        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 전체 성적의 25%이며 목요일 발표는 별도 15%입니다."
+        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 열쇠가 빠진 계획은 그 맵 0점입니다. 전체 성적의 25%이며 목요일 발표는 별도 15%입니다."
       }
     }
   ],
@@ -560,29 +562,29 @@ window.SITE_CONTENT_KO = {
       "각 평가 단위: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "bfs_distances, plan_cost, choose_targets의 표시된 빈칸을 채웁니다.",
-      "보물의 모든 조합과 순서를 시도하고, 에너지가 모자란 계획은 건너뜁니다.",
+      "bfs_distances의 이웃 처리(상하좌우, 벽, 맵 범위)를 작성하고 plan_cost를 작성합니다. 둘을 끝내면 주어진 시작 코드가 동작합니다.",
+      "choose_targets: 시작 코드(가장 가까운 보물부터)가 왜 점수를 잃는지 --view로 찾고 더 나은 방법을 설계합니다. 가진 에너지보다 많이 드는 계획은 안 됩니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "공식 성적은 grade.py. hidden map 없음.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "함수 틀과 TODO의 단계 설명을 보고 bfs_distances와 choose_targets를 작성합니다.",
-      "도전 맵은 보물 11~12개: 출구에 갈 수 없게 된 계획은 버립니다(가지치기). 10초를 넘긴 맵은 0점입니다.",
+      "bfs_distances, plan_cost, plan_score, choose_targets(TODO 1~4)를 작성합니다. 새 함수는 plan_score 하나입니다.",
+      "모든 계획에 열쇠 K가 들어가야 합니다. 열쇠를 주워야 출구가 열리고, 도전 맵은 열쇠를 계획 중간에 주워야 최고 점수입니다.",
       "공개 맵은 연습용: grade.py --practice. 비공개 맵 채점은 교수자가 실행합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "heapq로 dijkstra_distances를 작성합니다. 뼈대 코드의 빈칸을 채웁니다.",
-      "plan_cost와 choose_targets는 제공합니다.",
+      "dijkstra_distances: 힙과 반복문 틀에서 이웃 칸 처리를 직접 작성합니다.",
+      "plan_cost와 choose_targets는 1주차 목요일처럼 다시 작성합니다. 거리표의 숫자만 에너지로 바뀝니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "공식 성적은 grade.py. hidden map 없음.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
-      "함수 틀을 보고 dijkstra_distances(2주차 목)와 가지치기 choose_targets(2주차 화)를 작성합니다.",
-      "도전 맵: 진흙·물에 보물 11~12개. 10초를 넘긴 맵은 0점입니다.",
+      "dijkstra_distances, plan_cost, plan_score, choose_targets(TODO 1~4)를 작성합니다: 2주차 목요일 + plan_score.",
+      "진흙·물과 열쇠: 거리는 에너지이고, 모든 계획에 열쇠 K가 들어가야 합니다.",
       "공개 맵은 연습용: grade.py --practice. 비공개 맵 채점은 교수자가 실행합니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
