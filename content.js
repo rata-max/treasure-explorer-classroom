@@ -195,7 +195,7 @@ window.SITE_CONTENT = {
       "objectives": [
         "bfs_distances and plan_cost keep the Week 1 Thursday frames. find_key is provided.",
         "plan_score is the one new function: a plan without the key, or one that needs more energy than you have, is not allowed.",
-        "choose_targets has only its steps. At most 7 treasures plus the key, so trying every plan is fast enough."
+        "choose_targets comes with its first lines and a comment that lists three parts (4-a to 4-c); you write the loop. At most 7 treasures plus the key, so trying every plan is fast enough."
       ],
       "deliverables": [
         "student_policy.py"
@@ -240,7 +240,7 @@ window.SITE_CONTENT = {
       "repositoryUrl": null,
       "objectives": [
         "dijkstra_distances and plan_cost keep the Week 2 Thursday frames. find_key is provided.",
-        "plan_score is the one new function, as on Week 2 Tuesday; choose_targets has only its steps.",
+        "plan_score is the one new function, as on Week 2 Tuesday; choose_targets comes with its first lines and a comment listing 4-a to 4-c, and you write the loop.",
         "At most 7 treasures plus the key. The cheapest way to the key can be a long walk around mud and water."
       ],
       "deliverables": [
@@ -493,7 +493,7 @@ window.SITE_CONTENT_KO = {
       "objectives": [
         "bfs_distances와 plan_cost는 1주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
         "새 함수는 plan_score 하나: 열쇠가 빠졌거나 가진 에너지보다 많이 드는 계획은 안 됩니다.",
-        "choose_targets는 단계 설명만 주어집니다. 보물 7개 이하와 열쇠 하나라 모든 계획을 시도해도 충분히 빠릅니다."
+        "choose_targets는 앞부분과 할 일 3가지(4-a~4-c)를 적은 주석만 주어지고, 반복문은 직접 씁니다. 보물 7개 이하와 열쇠 하나라 모든 계획을 시도해도 충분히 빠릅니다."
       ],
       "deliverables": [
         "student_policy.py"
@@ -538,7 +538,7 @@ window.SITE_CONTENT_KO = {
       "repositoryUrl": null,
       "objectives": [
         "dijkstra_distances와 plan_cost는 2주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
-        "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 단계 설명만 주어집니다.",
+        "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 앞부분과 할 일 주석(4-a~4-c)만 주어지며 반복문은 직접 씁니다.",
         "보물 7개 이하와 열쇠 하나. 열쇠까지 가장 싼 길이 진흙·물을 피해 멀리 돌아가는 길일 수 있습니다."
       ],
       "deliverables": [

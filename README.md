@@ -60,7 +60,7 @@ node scripts/build_site.mjs --source C:\path\to\treasure-explorer-challenge
 
 각 회차는 바로 앞 회차에 규칙 하나, 함수 하나만 더합니다. 연습 회차는 TODO 함수의 틀(초기값·반복문)에서 핵심을 작성하고
 (1주차 목은 점수를 잃는 시작 코드를 개선), 테스트 회차는 앞 목요일과 같은 틀에 새 함수 `plan_score`를 더하고
-`choose_targets`는 단계 설명만 줍니다. `find_key`와 `distance_table`은 제공합니다.
+`choose_targets`는 앞부분과 할 일 주석만 주고, 반복문은 학생이 씁니다. `find_key`와 `distance_table`은 제공합니다.
 이웃 칸 도우미는 없고, `policy_helpers.py`의 상수(`TERRAIN_COST`, `COLLECT_COST`)는 모든 회차에서 같습니다.
 학생 ZIP의 `.vscode/settings.json`은 자동완성과 Copilot을 끕니다(`scripts/audit_archive.py`가 `.vscode` 안에서는 이 파일만 허용).
 모든 회차: 맵마다 탈출 50% + B·T 개선 50%, 기본 60 / 도전 40. 1주차 화요일 배포본은 원본 저장소에서 동결되어
