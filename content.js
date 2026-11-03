@@ -3,7 +3,7 @@
 window.RELEASES = {
   "week1_tuesday": true,
   "week1_thursday": true,
-  "week2_tuesday": false,
+  "week2_tuesday": true,
   "week2_thursday": false,
   "week3_tuesday": false
 };
