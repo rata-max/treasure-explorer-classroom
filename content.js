@@ -114,12 +114,12 @@ window.SITE_CONTENT = {
     [
       "W2 THU",
       "Public score only · Basic 60 + challenge 40",
-      "Dijkstra exercise. Nine public maps with mud (4) and water (7): write Dijkstra, then plan_cost and choose_targets again. The three challenge maps have 11 or 12 treasures: trying every order runs past 10 seconds, so drop a plan as soon as it cannot reach the exit. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra exercise. Nine public maps with mud (4) and water (7): write Dijkstra, then plan_cost and choose_targets again. The three challenge maps have 11 or 12 treasures: trying every order runs past 10 seconds, so the plan search has to be faster. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ],
     [
       "W3 TUE",
       "Hidden test · Basic 60 + challenge 40",
-      "Dijkstra test, 25% of the overall course grade. Mud, water and a key K; basic maps have at most 7 treasures, challenge maps 11 or 12, plus the key. Six public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra test, 25% of the overall course grade. Mud, water and a key K; basic maps have at most 7 treasures, challenge maps 11 or 12, plus the key, on trickier mud and water. Six public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ]
   ],
   "submissionRules": [
@@ -213,12 +213,12 @@ window.SITE_CONTENT = {
       "title": "WEIGHTED ROUTES ★★★",
       "unlocked": false,
       "tagline": "Mud and water: the fewest steps is no longer the least energy. And 11 or 12 treasures on challenge maps.",
-      "focus": "Dijkstra · Stopping early · Public score",
+      "focus": "Dijkstra · 10-second limit · Public score",
       "repositoryUrl": null,
       "objectives": [
         "dijkstra_distances: the heap and the loop are given; the neighbour updates (TERRAIN_COST) are yours.",
-        "plan_cost as on Week 1 Thursday. choose_targets gives a list of plans and the loop: grow plans one treasure at a time and drop a plan as soon as plan_cost > energy.",
-        "Challenge maps have 11 or 12 treasures: trying every order takes minutes, and a map over 10 seconds scores 0. No key this week."
+        "plan_cost and choose_targets: the frames of Week 1 Thursday. No key this week.",
+        "Challenge maps have 11 or 12 treasures: trying every order takes minutes, and a map over 10 seconds scores 0. Finding a faster search is up to you."
       ],
       "deliverables": [
         "student_policy.py"
@@ -235,13 +235,13 @@ window.SITE_CONTENT = {
       "day": "TUESDAY",
       "title": "DIJKSTRA TEST · THE KEY ★★★★",
       "unlocked": false,
-      "tagline": "New: the key of Week 2 Tuesday on the mud-and-water maps of Week 2 Thursday.",
+      "tagline": "New: the key of Week 2 Tuesday on trickier mud-and-water maps.",
       "focus": "Dijkstra · Plans with the key · Hidden maps",
       "repositoryUrl": null,
       "objectives": [
         "dijkstra_distances and plan_cost keep the Week 2 Thursday frames. find_key is provided.",
-        "plan_score is the one new function, as on Week 2 Tuesday; choose_targets has the Week 2 Thursday frame (the list of plans and the loop), and you write 4-a to 4-c.",
-        "Challenge maps have 11 or 12 treasures plus the key, so plans must stop early as on Thursday. The cheapest way to the key can be a long walk around mud and water."
+        "plan_score is the one new function, as on Week 2 Tuesday; choose_targets comes with its first lines and a comment listing 4-a to 4-c, and you write the loop.",
+        "Challenge maps have 11 or 12 treasures plus the key, under the same 10-second limit. Trickier terrain: the route with the fewest steps to the key always costs more than the cheapest one."
       ],
       "deliverables": [
         "student_policy.py"
@@ -279,7 +279,7 @@ window.SITE_CONTENT = {
     ],
     [
       "Finish dijkstra_distances: the heap and the loop are given; the neighbour updates are yours.",
-      "Write plan_cost as on Week 1 Thursday; choose_targets grows plans and drops a plan as soon as plan_cost > energy (11 or 12 treasures on challenge maps).",
+      "Write plan_cost and choose_targets as on Week 1 Thursday; on challenge maps (11 or 12 treasures) every order is too slow for the 10-second limit.",
       "Use one generic student_policy.py for all maps; no hardcoded map identification.",
       "Official grade: grade.py. No hidden maps.",
       "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
@@ -412,12 +412,12 @@ window.SITE_CONTENT_KO = {
     [
       "W2 THU",
       "공개 score만 · 기본 60 + 도전 40",
-      "Dijkstra 연습. 진흙(4)·물(7)이 있는 공개 맵 9개: Dijkstra를 작성하고 plan_cost와 choose_targets를 다시 작성합니다. 도전 맵 3개는 보물이 11~12개라 모든 순서를 비교하면 10초를 넘기므로, 출구에 못 가는 계획은 바로 버려야 합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 연습. 진흙(4)·물(7)이 있는 공개 맵 9개: Dijkstra를 작성하고 plan_cost와 choose_targets를 다시 작성합니다. 도전 맵 3개는 보물이 11~12개라 모든 순서를 비교하면 10초를 넘기므로 더 빠른 계획 찾기가 필요합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ],
     [
       "W3 TUE",
       "비공개 테스트 · 기본 60 + 도전 40",
-      "Dijkstra 테스트, 전체 성적의 25%. 진흙·물과 열쇠 K가 있고 보물은 기본 맵 7개 이하, 도전 맵 11~12개입니다. 공개 맵 6개는 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 테스트, 전체 성적의 25%. 진흙·물과 열쇠 K가 있고 보물은 기본 맵 7개 이하, 도전 맵 11~12개이고 진흙·물이 더 까다롭습니다. 공개 맵 6개는 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ]
   ],
   "submissionRules": [
@@ -511,12 +511,12 @@ window.SITE_CONTENT_KO = {
       "title": "가중치 경로 ★★★",
       "unlocked": false,
       "tagline": "진흙과 물: 걸음 수가 가장 적은 길이 가장 싼 길은 아닙니다. 도전 맵은 보물 11~12개.",
-      "focus": "Dijkstra · 일찍 멈추는 탐색 · 공개 score",
+      "focus": "Dijkstra · 10초 제한 · 공개 score",
       "repositoryUrl": null,
       "objectives": [
         "dijkstra_distances: 힙과 반복문 틀이 주어지고, 이웃 칸 처리(TERRAIN_COST)를 직접 작성합니다.",
-        "plan_cost는 1주차 목요일처럼 작성합니다. choose_targets는 계획 목록과 반복문 틀이 주어지고, 계획을 보물 하나씩 늘리다가 plan_cost > energy가 되면 바로 버립니다.",
-        "도전 맵은 보물 11~12개: 모든 순서를 비교하면 몇 분이 걸리고, 10초를 넘긴 맵은 0점입니다. 이번 회차에는 열쇠가 없습니다."
+        "plan_cost와 choose_targets는 1주차 목요일과 같은 틀입니다. 이번 회차에는 열쇠가 없습니다.",
+        "도전 맵은 보물 11~12개: 모든 순서를 비교하면 몇 분이 걸리고, 10초를 넘긴 맵은 0점입니다. 더 빠른 방법은 직접 찾습니다."
       ],
       "deliverables": [
         "student_policy.py"
@@ -533,13 +533,13 @@ window.SITE_CONTENT_KO = {
       "day": "화요일",
       "title": "Dijkstra 테스트 · 열쇠 ★★★★",
       "unlocked": false,
-      "tagline": "새로 생긴 것: 2주차 목요일의 진흙·물 맵에 2주차 화요일의 열쇠.",
+      "tagline": "새로 생긴 것: 더 까다로운 진흙·물 맵에 2주차 화요일의 열쇠.",
       "focus": "Dijkstra · 열쇠가 든 계획 · 비공개 맵",
       "repositoryUrl": null,
       "objectives": [
         "dijkstra_distances와 plan_cost는 2주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
-        "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 2주차 목요일과 같은 틀(계획 목록과 반복문)에 4-a~4-c를 직접 씁니다.",
-        "도전 맵은 보물 11~12개와 열쇠 하나라 목요일처럼 계획을 일찍 멈춰야 합니다. 열쇠까지 가장 싼 길이 진흙·물을 피해 멀리 돌아가는 길일 수 있습니다."
+        "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 앞부분과 할 일 주석(4-a~4-c)만 주어지며 반복문은 직접 씁니다.",
+        "도전 맵은 보물 11~12개와 열쇠 하나, 10초 제한은 그대로입니다. 지형이 더 까다로워 열쇠까지 걸음 수가 가장 적은 길은 항상 더 비쌉니다."
       ],
       "deliverables": [
         "student_policy.py"
@@ -577,7 +577,7 @@ window.SITE_CONTENT_KO = {
     ],
     [
       "dijkstra_distances: 힙과 반복문 틀에서 이웃 칸 처리를 직접 작성합니다.",
-      "plan_cost는 1주차 목요일처럼 작성하고, choose_targets는 계획을 늘리다가 plan_cost > energy가 되면 바로 버립니다(도전 맵 보물 11~12개).",
+      "plan_cost와 choose_targets는 1주차 목요일처럼 작성합니다. 도전 맵(보물 11~12개)은 모든 순서를 비교하면 10초 제한을 넘깁니다.",
       "모든 맵에 같은 student_policy.py를 사용합니다. 맵 식별 하드코딩 금지.",
       "공식 성적은 grade.py. hidden map 없음.",
       "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
