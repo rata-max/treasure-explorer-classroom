@@ -55,8 +55,8 @@ node scripts/build_site.mjs --source C:\path\to\treasure-explorer-challenge
 | 1주차 화 | 연습 (완료·동결) | BFS 경로, 보물 하나 (이전 코드 형식) | 공개 맵 |
 | 1주차 목 | 연습 | BFS 거리표 · 여러 보물의 조합과 순서 (점수를 잃는 시작 코드를 개선) | 공개 맵 `python grade.py` |
 | 2주차 화 | 테스트 | 출구를 여는 열쇠 K → 새 함수 `plan_score` 하나 (보물 7개 이하 + 열쇠) | 비공개 맵 (학생은 `--practice`) |
-| 2주차 목 | 연습 | 진흙·물 → Dijkstra, `plan_cost`·`choose_targets`는 1주차 목처럼 다시 작성 | 공개 맵 `python grade.py` |
-| 3주차 화 | 테스트 | 2주차 목 + 열쇠 → 새 함수 `plan_score` 하나 | 비공개 맵 (학생은 `--practice`) |
+| 2주차 목 | 연습 | 진흙·물 → Dijkstra. 도전 맵 보물 11~12개 → `choose_targets`는 계획을 늘리다가 출구에 못 가는 계획을 바로 버림 | 공개 맵 `python grade.py` |
+| 3주차 화 | 테스트 | 2주차 목 + 열쇠 → 새 함수 `plan_score` 하나 (도전 맵 보물 11~12개 + 열쇠) | 비공개 맵 (학생은 `--practice`) |
 
 각 회차는 바로 앞 회차에 규칙 하나, 함수 하나만 더합니다. 연습 회차는 TODO 함수의 틀(초기값·반복문)에서 핵심을 작성하고
 (1주차 목은 점수를 잃는 시작 코드를 개선), 테스트 회차는 앞 목요일과 같은 틀에 새 함수 `plan_score`를 더하고
