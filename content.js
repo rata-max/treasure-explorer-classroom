@@ -242,7 +242,7 @@ window.SITE_CONTENT = {
         "dijkstra_distances and plan_cost keep the Week 2 Thursday frames. find_key is provided.",
         "plan_score is the one new function, as on Week 2 Tuesday; choose_targets comes with its first lines and a comment listing 4-a to 4-c, and you write the loop.",
         "Challenge maps have 11 or 12 treasures plus the key, under the same 10-second limit. Trickier terrain: the route with the fewest steps to the key always costs more than the cheapest one.",
-        "No cutting the search short: a choose_targets that stops by time or by a count of plans scores 0 on the challenge maps."
+        "No cutting the search short: a choose_targets that stops by time, by a count of plans or at some plan length, or that imports time, scores 0 on the challenge maps. grade.py checks it and shows RULE."
       ],
       "deliverables": [
         "student_policy.py"
@@ -541,7 +541,7 @@ window.SITE_CONTENT_KO = {
         "dijkstra_distances와 plan_cost는 2주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
         "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 앞부분과 할 일 주석(4-a~4-c)만 주어지며 반복문은 직접 씁니다.",
         "도전 맵은 보물 11~12개와 열쇠 하나, 10초 제한은 그대로입니다. 지형이 더 까다로워 열쇠까지 걸음 수가 가장 적은 길은 항상 더 비쌉니다.",
-        "탐색을 중간에 끊으면 안 됩니다: 시간이나 계획 수를 세다가 멈추는 choose_targets는 도전 맵 0점입니다."
+        "탐색을 중간에 끊으면 안 됩니다: 시간·계획 수·계획 길이로 멈추거나 time을 import한 choose_targets는 도전 맵 0점입니다. grade.py가 검사해서 RULE로 표시합니다."
       ],
       "deliverables": [
         "student_policy.py"
