@@ -119,7 +119,7 @@ window.SITE_CONTENT = {
     [
       "W3 TUE",
       "Hidden test · Basic 60 + challenge 40",
-      "Dijkstra test, 25% of the overall course grade. Mud, water and a key K; basic maps have at most 7 treasures, challenge maps 11 or 12, plus the key, on trickier mud and water. Six public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra test, 25% of the overall course grade. Mud, water and a key K; basic maps have at most 7 treasures, challenge maps 11 or 12, plus the key, on trickier mud and water, and on some challenge maps the key is far away. Eight public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ]
   ],
   "submissionRules": [
@@ -242,6 +242,7 @@ window.SITE_CONTENT = {
         "dijkstra_distances and plan_cost keep the Week 2 Thursday frames. find_key is provided.",
         "plan_score is the one new function, as on Week 2 Tuesday; choose_targets comes with its first lines and a comment listing 4-a to 4-c, and you write the loop.",
         "Challenge maps have 11 or 12 treasures plus the key, under the same 10-second limit. Trickier terrain: the route with the fewest steps to the key always costs more than the cheapest one.",
+        "Far-key maps: on some challenge maps the key lies far from the start, the exit and the treasures. There, Week 2 Thursday's search with only a key check added runs over 10 seconds.",
         "No cutting the search short: a choose_targets that stops by time, by a count of plans or at some plan length, or that imports time, scores 0 on the challenge maps. grade.py checks it and shows RULE."
       ],
       "deliverables": [
@@ -418,7 +419,7 @@ window.SITE_CONTENT_KO = {
     [
       "W3 TUE",
       "비공개 테스트 · 기본 60 + 도전 40",
-      "Dijkstra 테스트, 전체 성적의 25%. 진흙·물과 열쇠 K가 있고 보물은 기본 맵 7개 이하, 도전 맵 11~12개이고 진흙·물이 더 까다롭습니다. 공개 맵 6개는 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 테스트, 전체 성적의 25%. 진흙·물과 열쇠 K가 있고 보물은 기본 맵 7개 이하, 도전 맵 11~12개이고 진흙·물이 더 까다로우며, 도전 맵 일부는 열쇠가 멀리 있습니다. 공개 맵 8개는 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ]
   ],
   "submissionRules": [
@@ -541,6 +542,7 @@ window.SITE_CONTENT_KO = {
         "dijkstra_distances와 plan_cost는 2주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
         "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 앞부분과 할 일 주석(4-a~4-c)만 주어지며 반복문은 직접 씁니다.",
         "도전 맵은 보물 11~12개와 열쇠 하나, 10초 제한은 그대로입니다. 지형이 더 까다로워 열쇠까지 걸음 수가 가장 적은 길은 항상 더 비쌉니다.",
+        "열쇠가 멀리 있는 도전 맵: 열쇠가 출발점·출구·보물에서 멀리 떨어져 있습니다. 2주차 목요일의 탐색에 열쇠 검사만 더한 코드는 이런 맵에서 10초를 넘깁니다.",
         "탐색을 중간에 끊으면 안 됩니다: 시간·계획 수·계획 길이로 멈추거나 time을 import한 choose_targets는 도전 맵 0점입니다. grade.py가 검사해서 RULE로 표시합니다."
       ],
       "deliverables": [
