@@ -119,7 +119,7 @@ window.SITE_CONTENT = {
     [
       "W3 TUE",
       "Hidden test · Basic 60 + challenge 40",
-      "Dijkstra test, 25% of the overall course grade. Mud, water and a key K; basic maps have at most 7 treasures, challenge maps 11 or 12, plus the key, on trickier mud and water. The public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
+      "Dijkstra test, 10% of the overall course grade. Mud, water and a key K; basic maps have at most 7 treasures, challenge maps 11 or 12, plus the key, on trickier mud and water. The public maps are practice; only hidden maps count. Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40."
     ]
   ],
   "submissionRules": [
@@ -252,7 +252,7 @@ window.SITE_CONTENT = {
       "evaluation": {
         "label": "HIDDEN SCORE",
         "title": "Hidden maps 85 + questions about your code 15.",
-        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40; the hidden-map grade counts x 0.85. Three questions about your code: 15 points, graded by the TA. A plan without the key scores 0 on that map. 25% of the overall course grade; the Thursday presentation is a separate 15%."
+        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40; the hidden-map grade counts x 0.85. Three questions about your code: 15 points, graded by the TA. A plan without the key scores 0 on that map. 10% of the overall course grade; the Thursday presentation is a separate 5%."
       }
     }
   ],
@@ -420,7 +420,7 @@ window.SITE_CONTENT_KO = {
     [
       "W3 TUE",
       "비공개 테스트 · 기본 60 + 도전 40",
-      "Dijkstra 테스트, 전체 성적의 25%. 진흙·물과 열쇠 K가 있고 보물은 기본 맵 7개 이하, 도전 맵 11~12개이고 진흙·물이 더 까다롭습니다. 공개 맵은 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
+      "Dijkstra 테스트, 전체 성적의 10%. 진흙·물과 열쇠 K가 있고 보물은 기본 맵 7개 이하, 도전 맵 11~12개이고 진흙·물이 더 까다롭습니다. 공개 맵은 연습용이며 비공개 맵만 반영합니다. 각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다."
     ]
   ],
   "submissionRules": [
@@ -553,7 +553,7 @@ window.SITE_CONTENT_KO = {
       "evaluation": {
         "label": "비공개 score 평가",
         "title": "비공개 맵 85점 + 코드 설명 질문 15점.",
-        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40이고, 비공개 맵 성적은 × 0.85로 반영합니다. 코드 설명 질문 3개는 15점이며 조교가 채점합니다. 열쇠가 빠진 계획은 그 맵 0점입니다. 전체 성적의 25%이며 목요일 발표는 별도 15%입니다."
+        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40이고, 비공개 맵 성적은 × 0.85로 반영합니다. 코드 설명 질문 3개는 15점이며 조교가 채점합니다. 열쇠가 빠진 계획은 그 맵 0점입니다. 전체 성적의 10%이며 목요일 발표는 별도 5%입니다."
       }
     }
   ],
