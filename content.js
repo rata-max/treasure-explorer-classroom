@@ -243,7 +243,8 @@ window.SITE_CONTENT = {
         "plan_score is the one new function, as on Week 2 Tuesday; choose_targets comes with its first lines and a comment listing 4-a to 4-c, and you write the loop.",
         "Challenge maps have 11 or 12 treasures plus the key, under the same 10-second limit. Trickier terrain: the route with the fewest steps to the key always costs more than the cheapest one.",
         "Far-key maps: on some challenge maps the key lies far from the start, the exit and the treasures.",
-        "No cutting the search short: a choose_targets that stops by time, by a count of plans or at some plan length, or that imports time, scores 0 on the challenge maps. grade.py checks it and shows RULE."
+        "No cutting the search short: a choose_targets that stops by time, by a count of plans or at some plan length, or that imports time, scores 0 on the challenge maps. grade.py checks it and shows RULE.",
+        "Questions about your code: answer three short questions in ANSWERS at the top of student_policy.py, in Korean or English. The TA grades them separately from grade.py."
       ],
       "deliverables": [
         "student_policy.py"
@@ -543,7 +544,8 @@ window.SITE_CONTENT_KO = {
         "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 앞부분과 할 일 주석(4-a~4-c)만 주어지며 반복문은 직접 씁니다.",
         "도전 맵은 보물 11~12개와 열쇠 하나, 10초 제한은 그대로입니다. 지형이 더 까다로워 열쇠까지 걸음 수가 가장 적은 길은 항상 더 비쌉니다.",
         "열쇠가 멀리 있는 도전 맵: 열쇠가 출발점·출구·보물에서 멀리 떨어져 있습니다.",
-        "탐색을 중간에 끊으면 안 됩니다: 시간·계획 수·계획 길이로 멈추거나 time을 import한 choose_targets는 도전 맵 0점입니다. grade.py가 검사해서 RULE로 표시합니다."
+        "탐색을 중간에 끊으면 안 됩니다: 시간·계획 수·계획 길이로 멈추거나 time을 import한 choose_targets는 도전 맵 0점입니다. grade.py가 검사해서 RULE로 표시합니다.",
+        "코드 설명 질문 3개: student_policy.py 맨 위 ANSWERS에 한국어나 영어로 답합니다. 조교가 grade.py 점수와 따로 채점합니다."
       ],
       "deliverables": [
         "student_policy.py"
