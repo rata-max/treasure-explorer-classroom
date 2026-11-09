@@ -242,16 +242,17 @@ window.SITE_CONTENT = {
         "dijkstra_distances and plan_cost keep the Week 2 Thursday frames. find_key is provided.",
         "plan_score is the one new function, as on Week 2 Tuesday; choose_targets comes with its first lines and a comment listing 4-a to 4-c, and you write the loop.",
         "Challenge maps have 11 or 12 treasures plus the key, under the same 10-second limit. Trickier terrain: the route with the fewest steps to the key always costs more than the cheapest one.",
-        "Far-key maps: on some challenge maps the key lies far from the start, the exit and the treasures. There, Week 2 Thursday's search with only a key check added runs over 10 seconds.",
-        "No cutting the search short: a choose_targets that stops by time, by a count of plans or at some plan length, or that imports time, scores 0 on the challenge maps. grade.py checks it and shows RULE."
+        "Far-key maps: on some challenge maps the key lies far from the start, the exit and the treasures.",
+        "No cutting the search short: a choose_targets that stops by time, by a count of plans or at some plan length, or that imports time, scores 0 on the challenge maps. grade.py checks it and shows RULE.",
+        "Questions about your code (15 points): answer three questions in ANSWERS at the top of student_policy.py, in Korean or English. The questions are in the file in both languages; the TA grades the answers."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
         "label": "HIDDEN SCORE",
-        "title": "Only the instructor's hidden maps count.",
-        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40. A plan without the key scores 0 on that map. 25% of the overall course grade; the Thursday presentation is a separate 15%."
+        "title": "Hidden maps 85 + questions about your code 15.",
+        "text": "Each map: escape 50% + B/T improvement 50%. Basic/challenge group weights 60/40; the hidden-map grade counts x 0.85. Three questions about your code: 15 points, graded by the TA. A plan without the key scores 0 on that map. 25% of the overall course grade; the Thursday presentation is a separate 15%."
       }
     }
   ],
@@ -542,16 +543,17 @@ window.SITE_CONTENT_KO = {
         "dijkstra_distances와 plan_cost는 2주차 목요일과 같은 틀입니다. find_key는 제공합니다.",
         "새 함수는 2주차 화요일처럼 plan_score 하나이고, choose_targets는 앞부분과 할 일 주석(4-a~4-c)만 주어지며 반복문은 직접 씁니다.",
         "도전 맵은 보물 11~12개와 열쇠 하나, 10초 제한은 그대로입니다. 지형이 더 까다로워 열쇠까지 걸음 수가 가장 적은 길은 항상 더 비쌉니다.",
-        "열쇠가 멀리 있는 도전 맵: 열쇠가 출발점·출구·보물에서 멀리 떨어져 있습니다. 2주차 목요일의 탐색에 열쇠 검사만 더한 코드는 이런 맵에서 10초를 넘깁니다.",
-        "탐색을 중간에 끊으면 안 됩니다: 시간·계획 수·계획 길이로 멈추거나 time을 import한 choose_targets는 도전 맵 0점입니다. grade.py가 검사해서 RULE로 표시합니다."
+        "열쇠가 멀리 있는 도전 맵: 열쇠가 출발점·출구·보물에서 멀리 떨어져 있습니다.",
+        "탐색을 중간에 끊으면 안 됩니다: 시간·계획 수·계획 길이로 멈추거나 time을 import한 choose_targets는 도전 맵 0점입니다. grade.py가 검사해서 RULE로 표시합니다.",
+        "코드 설명 질문 3개(15점): student_policy.py 맨 위 ANSWERS에 한국어나 영어로 답합니다. 질문은 파일에 두 언어로 있고, 답은 조교가 채점합니다."
       ],
       "deliverables": [
         "student_policy.py"
       ],
       "evaluation": {
         "label": "비공개 score 평가",
-        "title": "교수자의 비공개 맵만 성적에 반영합니다.",
-        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40입니다. 열쇠가 빠진 계획은 그 맵 0점입니다. 전체 성적의 25%이며 목요일 발표는 별도 15%입니다."
+        "title": "비공개 맵 85점 + 코드 설명 질문 15점.",
+        "text": "각 맵: 탈출 50% + B·T 개선 50%. 기본/도전 그룹 비중은 60/40이고, 비공개 맵 성적은 × 0.85로 반영합니다. 코드 설명 질문 3개는 15점이며 조교가 채점합니다. 열쇠가 빠진 계획은 그 맵 0점입니다. 전체 성적의 25%이며 목요일 발표는 별도 15%입니다."
       }
     }
   ],
