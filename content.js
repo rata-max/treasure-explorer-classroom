@@ -5,7 +5,7 @@ window.RELEASES = {
   "week1_thursday": true,
   "week2_tuesday": true,
   "week2_thursday": true,
-  "week3_tuesday": false
+  "week3_tuesday":true
 };
 
 window.SITE_CONTENT = {
